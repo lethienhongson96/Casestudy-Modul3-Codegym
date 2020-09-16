@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Account\ChangePass.cshtml" />
+    <None Include="Views\Account\Create.cshtml" />
+    <None Include="Views\Account\Edit.cshtml" />
+    <None Include="Views\Account\Index.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
+    <None Include="Views\Account\UserDetail.cshtml" />
     <None Include="Views\Category\Create.cshtml" />
     <None Include="Views\Category\Edit.cshtml" />
     <None Include="Views\Category\Index.cshtml" />
