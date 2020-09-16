@@ -1,6 +1,6 @@
 ﻿@model List<MoveDefaultView>
 
-@inject StoreDbContext context;
+@inject AppDbContext context;
 @{
     var CategoryList = context.Categories.ToList();
     const int DefaultCategoryId = 4; 

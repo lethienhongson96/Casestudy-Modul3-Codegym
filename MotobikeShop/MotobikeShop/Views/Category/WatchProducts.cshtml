@@ -1,6 +1,6 @@
-﻿@model StoreManagement.Models.Entities.Category
+﻿@model Category
 
-@inject StoreDbContext context;
+@inject AppDbContext context;
 @{
     var productList = context.Products.ToList().FindAll(el => el.CategoryId == Model.Id);
     

@@ -1,6 +1,6 @@
 ﻿@model List<Category>
 
-@inject StoreDbContext context;
+@inject AppDbContext context;
 @inject UserManager<ApplicationUser> userManager;
 @{
     var ProductList = context.Products.ToList();
