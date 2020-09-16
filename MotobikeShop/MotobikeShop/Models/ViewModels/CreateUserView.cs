@@ -18,7 +18,7 @@ namespace MotobikeShop.Models.ViewModels
 
         public string PhoneNum { get; set; }
 
-        public IFormFile iformfile_path { get; set; }
+        public IFormFile Iformfile_path { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
