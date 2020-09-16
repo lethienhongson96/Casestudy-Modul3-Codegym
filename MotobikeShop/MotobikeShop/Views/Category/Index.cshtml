@@ -1,0 +1,79 @@
+﻿@model List<Category>
+
+@inject StoreDbContext context;
+@inject UserManager<ApplicationUser> userManager;
+@{
+    var ProductList = context.Products.ToList();
+    const int DefaultCategoryId = 4;
+}
+
+<a asp-action="Create" asp-controller="Category">Create</a>
+
+<table id="CategoryIndex" class="table table-striped table-bordered" style="width:100%">
+    <thead style="text-align:center" class="thead-dark">
+        <tr>
+            <th>Tên danh mục</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Người tạo</th>
+            <th>Danh sách sản phẩm</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody style="text-align:center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Status</td>
+                <td>@item.CreateAt</td>
+                <td>
+                    <a asp-controller="Account" asp-action="UserDetail"
+                       asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">
+
+                        @userManager.FindByIdAsync(item.CreateBy).Result.FullName
+                        <img src="~/Images/UserImages/@userManager.FindByIdAsync(item.CreateBy).Result.Avatar"
+                             alt="Alternate Text" style="width:27px;height:27px" />
+                    </a>
+                </td>
+                <td>
+                    <a asp-controller="Category" asp-action="WatchProducts" asp-route-id="@item.Id">
+                        @ProductList.FindAll(el => el.CategoryId == item.Id).Count Sản Phẩm
+                    </a>
+                </td>
+                @if (item.Id != DefaultCategoryId)
+                {
+                    <td>
+                        <a href="javascript:void(0)" class="text-danger" onclick="Category.delete(@item.Id)">
+                            Xóa
+                        </a>
+                        <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-controller="Category" asp-action="MoveDefaultToAnother" asp-route-id="@item.Id">
+                            Di Chuyển Danh Mục
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+    <tfoot style="text-align:center" class="thead-dark">
+        <tr>
+            <th>Tên danh mục</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Người tạo</th>
+            <th>Danh sách sản phẩm</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
+</table>
+
+@section Scripts{
+    <script src="~/js/Category.js" asp-append-version="true"></script>
+}

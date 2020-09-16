@@ -22,4 +22,12 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Category\Create.cshtml" />
+    <None Include="Views\Category\Edit.cshtml" />
+    <None Include="Views\Category\Index.cshtml" />
+    <None Include="Views\Category\MoveDefaultToAnother.cshtml" />
+    <None Include="Views\Category\WatchProducts.cshtml" />
+  </ItemGroup>
+
 </Project>

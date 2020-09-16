@@ -1,0 +1,37 @@
+﻿@model List<MoveDefaultView>
+
+@inject StoreDbContext context;
+@{
+    var CategoryList = context.Categories.ToList();
+    const int DefaultCategoryId = 4; 
+}
+
+@using (Html.BeginForm("MoveDefaultToAnother", "Category", FormMethod.Post))
+{
+    <table class="table">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.Hidden("MoveDefaultViews.Index", (@i + 10))
+
+            @Html.Hidden("MoveDefaultViews[" + (@i + 10) + "].Id",
+                   Model[i].Id)
+            <tr>
+                <td>
+                    @Html.TextBox("MoveDefaultViews[" + (@i + 10) + "].Name",
+                    Model[i].Name, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td>
+                    @Html.DropDownList("MoveDefaultViews[" + (@i + 10) + "].CategoryId",
+                        new SelectList(CategoryList, "Id", "Name", DefaultCategoryId),
+                        new { @class = "form-control" })
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-success">Lưu Tất Cả Thay đổi</button>
+            </td>
+        </tr>
+    </table>
+}
+
