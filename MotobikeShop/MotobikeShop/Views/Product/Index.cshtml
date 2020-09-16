@@ -1,0 +1,70 @@
+﻿@model List<Product>
+
+@inject AppDbContext context;
+@inject UserManager<ApplicationUser> userManager;
+@{
+
+}
+<a asp-action="Create" asp-controller="Product" style="float:right">Create</a>
+
+<table class="table" id="ProductIndex">
+    <thead class="thead-dark" style="text-align:center">
+        <tr>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col">người tạo</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Danh mục</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody style="text-align:center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.PricePerUnit</td>
+                <td>@item.CreateAt</td>
+                <td>
+                    <a asp-controller="Account" asp-action="UserDetail"
+                       asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">
+                        
+                        @userManager.FindByIdAsync(item.CreateBy).Result.FullName
+                        <img src="~/Images/UserImages/@userManager.FindByIdAsync(item.CreateBy).Result.Avatar"
+                             alt="Alternate Text" style="width:30px;height:30px" />
+                    </a>
+                </td>
+                <td>
+                    <img src="~/images/ProductImages/@item.ImagePath" alt="Alternate Text" style="width:50px;height:45px"
+                         asp-append-version="true" />
+                </td>
+                <td>@item.Status</td>
+                <td>@context.Categories.FirstOrDefault(el => el.Id == item.CategoryId).Name</td>
+
+                <td>
+                    <a asp-action="Edit" asp-controller="Product" asp-route-id="@item.Id">Edit</a>
+
+                    <a href="javascript:void(0)" class="text-danger" onclick="Product.delete(@item.Id)">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="thead-dark" style="text-align:center">
+        <tr>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col">người tạo</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Danh mục</th>
+            <th scope="col">Action</th>
+        </tr>
+    </tfoot>
+</table>
+
+@section Scripts{
+    <script src="~/js/Product.js" asp-append-version="true"></script>
+}
