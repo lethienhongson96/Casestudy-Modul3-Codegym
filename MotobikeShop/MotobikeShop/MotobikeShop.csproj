@@ -29,6 +29,10 @@
     <None Include="Views\Category\Index.cshtml" />
     <None Include="Views\Category\MoveDefaultToAnother.cshtml" />
     <None Include="Views\Category\WatchProducts.cshtml" />
+    <None Include="Views\OrderDetail\Create.cshtml" />
+    <None Include="Views\OrderDetail\Edit.cshtml" />
+    <None Include="Views\OrderDetail\Index.cshtml" />
+    <None Include="Views\OrderDetail\WatchOrderDetail.cshtml" />
     <None Include="Views\Order\Create.cshtml" />
     <None Include="Views\Order\Edit.cshtml" />
     <None Include="Views\Order\Index.cshtml" />
