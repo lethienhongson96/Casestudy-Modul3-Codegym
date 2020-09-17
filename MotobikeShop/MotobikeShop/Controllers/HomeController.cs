@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MotobikeShop.Models;
+using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
 {
@@ -14,15 +15,17 @@ namespace MotobikeShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryRepository categoryRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,ICategoryRepository categoryRepository)
         {
             _logger = logger;
+            this.categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(categoryRepository.GetCategories());
         }
 
         public IActionResult Privacy()
