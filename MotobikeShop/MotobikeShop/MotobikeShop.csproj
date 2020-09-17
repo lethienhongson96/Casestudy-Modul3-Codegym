@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Images\ProductImages\Honda-XR150.jpg\**" />
+    <Content Remove="wwwroot\Images\ProductImages\Honda-XR150.jpg\**" />
+    <EmbeddedResource Remove="wwwroot\Images\ProductImages\Honda-XR150.jpg\**" />
+    <None Remove="wwwroot\Images\ProductImages\Honda-XR150.jpg\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 

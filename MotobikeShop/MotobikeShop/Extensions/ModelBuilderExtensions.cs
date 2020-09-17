@@ -65,10 +65,10 @@ namespace MotobikeShop.Extensions
                 new Product
                 {
                     Id = 1,
-                    Name = "Iphone 5",
-                    PricePerUnit = 5000000,
+                    Name = "Honda XR150",
+                    PricePerUnit = 40000000,
                     CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
+                    ImagePath = "Honda-XR150.jpg",
                     Status = Enums.Status.Active,
                     CategoryId = 1,
                     CreateBy = ADMIN_ID
@@ -76,10 +76,10 @@ namespace MotobikeShop.Extensions
                 new Product
                 {
                     Id = 2,
-                    Name = "Iphone 6",
-                    PricePerUnit = 6000000,
+                    Name = "Honda CRF150",
+                    PricePerUnit = 60000000,
                     CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
+                    ImagePath = "Honda-CRF150.jpg",
                     Status = Enums.Status.Active,
                     CategoryId = 1,
                     CreateBy = ADMIN_ID
@@ -87,59 +87,47 @@ namespace MotobikeShop.Extensions
                 new Product
                 {
                     Id = 3,
-                    Name = "Iphone 7",
-                    PricePerUnit = 7000000,
+                    Name = "WR 150",
+                    PricePerUnit = 42000000,
                     CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
+                    ImagePath = "WR150.jpg",
                     Status = Enums.Status.Active,
-                    CategoryId = 1,
+                    CategoryId = 2,
                     CreateBy = ADMIN_ID
                 },
                 new Product
                 {
                     Id = 4,
-                    Name = "Galaxy 3",
-                    PricePerUnit = 3000000,
+                    Name = "DR 150",
+                    PricePerUnit = 45000000,
                     CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
+                    ImagePath = "DR150.jpg",
                     Status = Enums.Status.Active,
-                    CategoryId = 2,
+                    CategoryId = 3,
                     CreateBy = ADMIN_ID
                 },
                 new Product
                 {
                     Id = 5,
-                    Name = "Galaxy 4",
-                    PricePerUnit = 4000000,
+                    Name = "KLX 110",
+                    PricePerUnit = 50000000,
                     CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
+                    ImagePath = "Klx110.jpg",
                     Status = Enums.Status.Active,
-                    CategoryId = 2,
+                    CategoryId = 5,
                     CreateBy = ADMIN_ID
                 },
                 new Product
                 {
                     Id = 6,
-                    Name = "BPhone 10",
+                    Name = "KLX 125",
                     PricePerUnit = 10000000,
                     CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
+                    ImagePath = "klx125.jpg",
                     Status = Enums.Status.Active,
-                    CategoryId = 3,
+                    CategoryId = 5,
                     CreateBy = ADMIN_ID
-                },
-                new Product
-                {
-                    Id = 7,
-                    Name = "BPhone 11",
-                    PricePerUnit = 11000000,
-                    CreateAt = DateTime.Today,
-                    ImagePath = "default_product_image.png",
-                    Status = Enums.Status.Active,
-                    CategoryId = 3,
-                    CreateBy = ADMIN_ID
-                }
-                );
+                });
             #endregion
 
             modelBuilder.Entity<Address>().HasData(new Address
