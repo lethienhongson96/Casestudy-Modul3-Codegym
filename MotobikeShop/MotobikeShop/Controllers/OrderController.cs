@@ -31,8 +31,8 @@ namespace MotobikeShop.Controllers
             {
                 if (orderRepository.CreateOrder(order) > 0)
                     return RedirectToAction("Index", "Order");
-                else
-                    ModelState.AddModelError("", "some thing wrong");
+
+                ModelState.AddModelError("", TextErrorToView.WrongMess);
             }
             return View(order);
         }
@@ -54,10 +54,9 @@ namespace MotobikeShop.Controllers
         public IActionResult Edit(Order order)
         {
             if (orderRepository.UpdateOrder(order) > 0)
-            {
                 return RedirectToAction("Index", "Order");
-            }
-            ModelState.AddModelError("", "some thing wrong");
+
+            ModelState.AddModelError("", TextErrorToView.WrongMess);
 
             return View(order);
         }

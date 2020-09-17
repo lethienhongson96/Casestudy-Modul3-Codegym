@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MotobikeShop.Enums;
 using MotobikeShop.Models.Entities;
 using MotobikeShop.Models.ViewModels;
 using MotobikeShop.Repositories;
@@ -32,8 +33,8 @@ namespace MotobikeShop.Controllers
             {
                 if (categoryRepository.CreateCategory(category) > 0)
                     return RedirectToAction("Index", "Category");
-                else
-                    ModelState.AddModelError("", "some thing wrong");
+
+                ModelState.AddModelError("", TextErrorToView.WrongMess);
             }
             return View(category);
         }
@@ -48,8 +49,8 @@ namespace MotobikeShop.Controllers
             {
                 if (categoryRepository.UpdateCategory(category) > 0)
                     return RedirectToAction("Index", "Category");
-                else
-                    ModelState.AddModelError("", "some thing wrong");
+
+                ModelState.AddModelError("", TextErrorToView.WrongMess);
             }
 
             return View();
@@ -74,10 +75,8 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult MoveDefaultToAnother(int id)
-        {
-            return View(categoryRepository.GetListMoveDefaultViewByCateId(id));
-        }
+        public IActionResult MoveDefaultToAnother(int id) =>
+             View(categoryRepository.GetListMoveDefaultViewByCateId(id));
 
         [HttpPost]
         public ActionResult MoveDefaultToAnother(List<MoveDefaultView> MoveDefaultViews)

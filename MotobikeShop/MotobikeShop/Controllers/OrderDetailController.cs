@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MotobikeShop.Enums;
 using MotobikeShop.Models;
 using MotobikeShop.Models.Entities;
 using MotobikeShop.Repositories;
@@ -37,11 +38,11 @@ namespace MotobikeShop.Controllers
             {
                 if (detailRepository.CreateOrderDetail(orderDetail) > 0 && orderDetail.Quantity > 0)
                     return RedirectToAction("WatchOrderDetail", "OrderDetail", detailRepository.GetOrderByid(orderDetail.OrderId));
-                else
-                    ModelState.AddModelError("", "Quantity is not Null");
+
+                ModelState.AddModelError("", "Quantity is not Null");
             }
             else
-                ModelState.AddModelError("", "Some thing wrong");
+                ModelState.AddModelError("", TextErrorToView.WrongMess);
 
             return View(orderDetail);
         }
@@ -65,18 +66,14 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int ProductId, int OrderId)
-        {
-            return View(detailRepository.GetOrderDetailByIds(ProductId, OrderId));
-        }
+        public IActionResult Edit(int ProductId, int OrderId) =>
+            View(detailRepository.GetOrderDetailByIds(ProductId, OrderId));
 
         [HttpPost]
         public IActionResult Edit(OrderDetail orderDetail)
         {
             if (detailRepository.UpdateOrderDetail(orderDetail) > 0)
-            {
                 return RedirectToAction("WatchOrderDetail", "OrderDetail", detailRepository.GetOrderByid(orderDetail.OrderId));
-            }
 
             return View(orderDetail);
         }

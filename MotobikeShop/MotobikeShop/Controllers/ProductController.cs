@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MotobikeShop.Enums;
 using MotobikeShop.Models.ViewModels;
 using MotobikeShop.Repositories;
 
@@ -31,8 +32,8 @@ namespace MotobikeShop.Controllers
             {
                 if (_productRepository.CreateProduct(productView) > 0)
                     return RedirectToAction("Index", "Product");
-                else
-                    ModelState.AddModelError("", "something wrong");
+
+                ModelState.AddModelError("", TextErrorToView.WrongMess);
             }
             return View();
         }
@@ -45,10 +46,8 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            return View(_productRepository.FindProductToView(id));
-        }
+        public IActionResult Edit(int id) =>
+            View(_productRepository.FindProductToView(id));
 
         [HttpPost]
         public IActionResult Edit(EditProductView productView)
@@ -56,9 +55,7 @@ namespace MotobikeShop.Controllers
             if (ModelState.IsValid)
             {
                 if (_productRepository.UpdateProduct(productView) > 0)
-                {
                     return RedirectToAction("Index", "Product");
-                }
             }
             return View(productView);
         }
