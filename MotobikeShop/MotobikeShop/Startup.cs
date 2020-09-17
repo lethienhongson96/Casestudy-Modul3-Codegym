@@ -39,6 +39,7 @@ namespace MotobikeShop
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ConnectionStr")));

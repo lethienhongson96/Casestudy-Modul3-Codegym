@@ -15,23 +15,24 @@ namespace MotobikeShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICategoryRepository categoryRepository;
+        private readonly IHomeRepository homeRepository;
 
-        public HomeController(ILogger<HomeController> logger,ICategoryRepository categoryRepository)
+        public HomeController(ILogger<HomeController> logger, IHomeRepository homeRepository)
         {
             _logger = logger;
-            this.categoryRepository = categoryRepository;
+            this.homeRepository = homeRepository;
         }
 
-        public IActionResult Index()
-        {
-            return View(categoryRepository.GetCategories());
-        }
+        public IActionResult Index() =>
+            View(homeRepository.GetCategories());
 
         public IActionResult Privacy()
         {
             return View();
         }
+
+        public IActionResult WatchProduct(int id) =>
+             View(homeRepository.GetProductsByCateId(id));
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -23,7 +23,8 @@
             <a asp-controller="Home" asp-action="WatchProduct" asp-route-id="@item.Id">
                 <div class="col-lg-6 mt-5">
                     <div class="p-3 card card_border">
-                        <div class="pl-0 pt-0 card-header chart-grid__header">
+                        <div class="pl-0 pt-0 card-header chart-grid__header" style="text-align:center">
+                            @item.Name
                         </div>
 
                         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
