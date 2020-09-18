@@ -85,7 +85,7 @@ namespace MotobikeShop.RepositoryImps
         public List<Product> GetProductsByCategoryId(int id) =>
             context.Products.ToList().FindAll(el => el.CategoryId == id && el.Status == Enums.Status.Active);
 
-        public List<ReStoreCategoryView> InActiveCategories()
+        public List<ReStoreCategoryView> GetInActiveCategories()
         {
             List<Category> InActivecategories = context.Categories.ToList().FindAll(el => el.Status == Enums.Status.InActive);
             List<ReStoreCategoryView> reStoreCategoryViews = new List<ReStoreCategoryView>();
@@ -100,6 +100,24 @@ namespace MotobikeShop.RepositoryImps
                 reStoreCategoryViews.Add(reStoreCategoryView);
             }
             return reStoreCategoryViews;
+        }
+
+        public int RestoreCategories(List<ReStoreCategoryView> reStoreCategoryViews)
+        {
+            List<Category> Categories = new List<Category>();
+            foreach (var item in reStoreCategoryViews)
+                if (item.IsRestore)
+                {
+                    var category = context.Categories.FirstOrDefault(el => el.Id == item.Id);
+                    category.Status = Enums.Status.Active;
+                    Categories.Add(category);
+
+                    context.Products.ToList().FindAll(el =>
+                        el.CategoryId == category.Id).ForEach(el => el.Status = Enums.Status.Active);
+                }
+            context.UpdateRange(Categories);
+
+            return Task.Run(async () => await context.SaveChangesAsync()).Result;
         }
     }
 }

@@ -73,12 +73,15 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Restore() => View(categoryRepository.InActiveCategories());
+        public IActionResult Restore() => View(categoryRepository.GetInActiveCategories());
 
         
         [HttpPost]
         public IActionResult Restore(List<ReStoreCategoryView> reStoreCategoryViews)
         {
+            if (categoryRepository.RestoreCategories(reStoreCategoryViews) > 0)
+                return RedirectToAction("Index","Category");
+
             return View(reStoreCategoryViews);
         }
     }

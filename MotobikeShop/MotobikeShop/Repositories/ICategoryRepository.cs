@@ -23,6 +23,8 @@ namespace MotobikeShop.Repositories
 
         List<Product> GetProductsByCategoryId(int id);
 
-        List<ReStoreCategoryView> InActiveCategories();
+        List<ReStoreCategoryView> GetInActiveCategories();
+
+         int RestoreCategories(List<ReStoreCategoryView> reStoreCategoryViews);
     }
 }
