@@ -56,8 +56,7 @@ namespace MotobikeShop.Extensions
             new Category { Id = 1, Name = "HonDa", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
             new Category { Id = 2, Name = "Yamaha", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
             new Category { Id = 3, Name = "Suzuki", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
-            new Category { Id = 4, Name = "No Category", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
-            new Category { Id = 5, Name = "Ktm", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID }
+            new Category { Id = 4, Name = "Ktm", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID }
             );
 
             #region Create Product
@@ -114,7 +113,7 @@ namespace MotobikeShop.Extensions
                     CreateAt = DateTime.Today,
                     ImagePath = "Klx110.jpg",
                     Status = Enums.Status.Active,
-                    CategoryId = 5,
+                    CategoryId = 4,
                     CreateBy = ADMIN_ID
                 },
                 new Product
@@ -125,7 +124,7 @@ namespace MotobikeShop.Extensions
                     CreateAt = DateTime.Today,
                     ImagePath = "klx125.jpg",
                     Status = Enums.Status.Active,
-                    CategoryId = 5,
+                    CategoryId = 4,
                     CreateBy = ADMIN_ID
                 });
             #endregion

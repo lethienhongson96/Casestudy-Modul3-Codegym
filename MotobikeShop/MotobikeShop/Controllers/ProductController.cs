@@ -19,7 +19,7 @@ namespace MotobikeShop.Controllers
         }
         public IActionResult Index()
         {
-            return View(_productRepository.GetProductList());
+            return View(_productRepository.ProductList);
         }
 
         [HttpGet]

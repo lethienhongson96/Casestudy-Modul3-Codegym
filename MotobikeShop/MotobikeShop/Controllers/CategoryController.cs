@@ -18,10 +18,9 @@ namespace MotobikeShop.Controllers
         {
             this.categoryRepository = categoryRepository;
         }
-        public IActionResult Index()
-        {
-            return View(categoryRepository.GetCategories());
-        }
+
+        [HttpGet]
+        public IActionResult Index() => View(categoryRepository.Categories);
 
         [HttpGet]
         public IActionResult Create() => View();
@@ -57,8 +56,7 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult WatchProducts(int id) =>
-             View(categoryRepository.GetCategoryById(id));
+        public IActionResult WatchProducts(int id) => View(categoryRepository.GetProductsByCategoryId(id));
 
         [Route("/Category/Delete/{id}")]
         public IActionResult Delete(int id)
@@ -70,29 +68,18 @@ namespace MotobikeShop.Controllers
         [Route("/Category/RemoveProductFromCategory/{id}")]
         public IActionResult RemoveProductFromCategory(int id)
         {
-            var result = categoryRepository.MoveCategoryForProduct(id);
+            var result = categoryRepository.RemoveProduct(id);
             return Json(new { result });
         }
 
         [HttpGet]
-        public IActionResult MoveDefaultToAnother(int id) =>
-             View(categoryRepository.GetListMoveDefaultViewByCateId(id));
+        public IActionResult Restore() => View(categoryRepository.InActiveCategories());
 
+        
         [HttpPost]
-        public ActionResult MoveDefaultToAnother(List<MoveDefaultView> MoveDefaultViews)
+        public IActionResult Restore(List<ReStoreCategoryView> reStoreCategoryViews)
         {
-            var ProductList = new List<Product>();
-
-            foreach (var item in MoveDefaultViews)
-            {
-                var Product = categoryRepository.GetProductById(item.Id);
-                Product.CategoryId = item.CategoryId;
-                ProductList.Add(Product);
-            }
-            if (categoryRepository.MoveRangeCategoryForProduct(ProductList) > 0)
-                return RedirectToAction("Index", "Category");
-
-            return View(MoveDefaultViews);
+            return View(reStoreCategoryViews);
         }
     }
 }

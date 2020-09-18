@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MotobikeShop.Enums;
 using MotobikeShop.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace MotobikeShop.Configurations
                 .HasDefaultValue("default_product_image.png");
 
             builder.Property(x => x.CategoryId).IsRequired();
+
+            builder.Property(x => x.Status).IsRequired().HasDefaultValue(Status.Active); 
 
             builder.HasOne(p => p.ApplicationUser)
                 .WithMany(b => b.Products)

@@ -1,0 +1,31 @@
+﻿@model List<ReStoreCategoryView>
+
+@{
+}
+
+@using (Html.BeginForm("Restore", "Category", FormMethod.Post))
+{
+    <table class="table">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.Hidden("ReStoreCategoryViews.Index", (@i + 10))
+
+            @Html.Hidden("ReStoreCategoryViews[" + (@i + 10) + "].Id",
+                   Model[i].Id)
+            <tr>
+                <td>
+                    @Html.TextBox("ReStoreCategoryViews[" + (@i + 10) + "].Name",
+                    Model[i].Name, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td>
+                    @Html.CheckBox("ReStoreCategoryViews[" + (@i + 10) + "].IsRestore", Model[i].IsRestore) Khôi Phục
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-success">Lưu Tất Cả Thay đổi</button>
+            </td>
+        </tr>
+    </table>
+}

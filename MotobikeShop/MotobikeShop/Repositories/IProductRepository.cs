@@ -14,7 +14,7 @@ namespace MotobikeShop.Repositories
 
         string UploadedFile(IFormFile formFile);
 
-        List<Product> GetProductList();
+        List<Product> ProductList { get; }
 
         int DeleteProduct(int id);
 

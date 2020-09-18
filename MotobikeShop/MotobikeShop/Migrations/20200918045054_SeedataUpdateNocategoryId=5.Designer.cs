@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200918045054_SeedataUpdateNocategoryId=5")]
+    partial class SeedataUpdateNocategoryId5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
-                            ConcurrencyStamp = "c5846298-4bde-4307-b090-1a460a8741d0",
+                            ConcurrencyStamp = "2e865de8-d65b-4838-a826-9ff2fe9b6cee",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -251,14 +253,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "506f3d62-5d33-455f-8c17-8af924ce7d1c",
+                            ConcurrencyStamp = "337b57e6-de91-4cd9-9f61-c19802fe14b9",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN3JjtB/syep+6nst696DPqPQe7FyBLMeww6j6EUHQqUSHyg4NN5NOEnhy1cRqO87A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDWR00INSY6PqCaKdgTpEHDwE12W+YKcS3bJJPteqASUv1dV5xABrVIga01tXl6jpg==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -271,14 +273,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "4f5c9a31-6dec-4e40-8941-33a8a91e34aa",
+                            ConcurrencyStamp = "b8505101-d98e-4d39-96be-06035a4dd33f",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC1m/ts5QNWK17l9D+jFwzxRRMHjPSZ4VZ2npyuu76sUVDGemdW9sIJIjY6hjGD0Iw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECKrOJ2tHLV+vmmK9UT0h1EtPgkzt22B03jnISFEPnGTvRQ9ShXrI82gzkrF5L2bDQ==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -357,9 +359,7 @@ namespace MotobikeShop.Migrations
                         .HasMaxLength(200);
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -601,9 +601,7 @@ namespace MotobikeShop.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

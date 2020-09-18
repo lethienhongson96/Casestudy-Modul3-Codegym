@@ -16,10 +16,9 @@ namespace MotobikeShop.RepositoryImps
         {
             this.context = context;
         }
-        public List<Category> GetCategories() =>
-            context.Categories.ToList();
+        public List<Category> Categories => context.Categories.ToList().FindAll(el => el.Status == Enums.Status.Active);
 
         public List<Product> GetProductsByCateId(int id) =>
-            context.Products.ToList().FindAll(el => el.CategoryId == id);
+            context.Products.ToList().FindAll(el => el.CategoryId == id && el.Status==Enums.Status.Active);
     }
 }

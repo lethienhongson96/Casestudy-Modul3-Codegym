@@ -11,7 +11,7 @@ namespace MotobikeShop.Repositories
     {
         int CreateCategory(Category category);
 
-        IEnumerable<Category> GetCategories();
+        List<Category> Categories { get; }
 
         Category GetCategoryById(int id);
 
@@ -19,12 +19,10 @@ namespace MotobikeShop.Repositories
 
         int DeleteCategory(int id);
 
-        int MoveCategoryForProduct(int id);
+        int RemoveProduct(int id);
 
-        List<MoveDefaultView> GetListMoveDefaultViewByCateId(int id);
+        List<Product> GetProductsByCategoryId(int id);
 
-        int MoveRangeCategoryForProduct(List<Product> products);
-
-        Product GetProductById(int id);
+        List<ReStoreCategoryView> InActiveCategories();
     }
 }

@@ -85,7 +85,6 @@
                         <ul class="sub-menu-list">
                             <li><a asp-controller="Product" asp-action="Index">Quản Lí Sản Phẩm</a></li>
                             <li><a asp-controller="Product" asp-action="Create">Tạo Sản Phẩm Mới</a></li>
-                            <li><a href="people.html">Thanh Toán</a></li>
                         </ul>
                     </li>
                     <li class="menu-list">
@@ -96,7 +95,7 @@
                         <ul class="sub-menu-list">
                             <li><a asp-controller="Category" asp-action="Index">Quản Lí Danh Mục</a></li>
                             <li><a asp-controller="Category" asp-action="Create">Tạo Danh Mục Mới</a></li>
-                            <li><a href="people.html">Thanh Toán</a></li>
+                            <li><a asp-controller="Category" asp-action="Restore">Khôi Phục Danh Mục</a></li>
                         </ul>
                     </li>
                     <li>
@@ -169,14 +168,22 @@
                                             </li>
                                         </ul>
                                     </li>
+
                                 }
                             </ul>
                         </div>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-top:20px"></i>
+                            <span style="color:red;padding-left:1px;">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
             <!--notification menu end -->
         </div>
+      
         <!-- //header-ends -->
         <!-- main content start -->
         <div class="main-content">

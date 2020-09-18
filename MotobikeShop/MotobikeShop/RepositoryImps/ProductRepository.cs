@@ -30,14 +30,12 @@ namespace MotobikeShop.RepositoryImps
                 PricePerUnit = productView.Price,
                 CreateAt = productView.CreateAt,
                 CreateBy = productView.CreateBy,
-                Status = productView.Status,
                 CategoryId = productView.CategoryId
             };
             if (productView.IformfilePath != null)
                 product.ImagePath = UploadedFile(productView.IformfilePath);
 
             _context.Products.Add(product);
-
             return (_context.SaveChanges());
         }
 
@@ -47,12 +45,8 @@ namespace MotobikeShop.RepositoryImps
 
             if (product != null)
             {
-                if (!string.IsNullOrEmpty(product.ImagePath) && product.ImagePath != ProductImageDefault)
-                {
-                    string DelPath = Path.Combine(_webHostEnvironment.WebRootPath, "Images/ProductImages", product.ImagePath);
-                    File.Delete(DelPath);
-                }
-                _context.Products.Remove(product);
+                product.Status = Enums.Status.InActive;
+                _context.Update(product);
 
                 return _context.SaveChanges();
             }
@@ -70,7 +64,6 @@ namespace MotobikeShop.RepositoryImps
                 Price = product.PricePerUnit,
                 CreateAt = product.CreateAt,
                 CreateBy = product.CreateBy,
-                Status = product.Status,
                 CategoryId = product.CategoryId,
                 ImgPath = product.ImagePath
             };
@@ -78,10 +71,7 @@ namespace MotobikeShop.RepositoryImps
             return productview;
         }
 
-        public List<Product> GetProductList()
-        {
-            return _context.Products.ToList();
-        }
+        public List<Product> ProductList => _context.Products.ToList().FindAll(el => el.Status == Enums.Status.Active);
 
         public int UpdateProduct(EditProductView productView)
         {
@@ -92,7 +82,6 @@ namespace MotobikeShop.RepositoryImps
             product.CreateAt = productView.CreateAt;
             product.CreateBy = productView.CreateBy;
             product.PricePerUnit = productView.Price;
-            product.Status = productView.Status;
 
             if (productView.IformfilePath != null)
             {
@@ -104,7 +93,6 @@ namespace MotobikeShop.RepositoryImps
                     File.Delete(DelPath);
                 }
             }
-
             _context.Update(product);
             return (_context.SaveChanges());
         }

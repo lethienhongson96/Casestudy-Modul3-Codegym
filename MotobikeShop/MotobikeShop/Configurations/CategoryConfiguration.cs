@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MotobikeShop.Enums;
 using MotobikeShop.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace MotobikeShop.Configurations
 
             builder.Property(x => x.Name).HasMaxLength(200).IsRequired();
 
-            builder.Property(x => x.Status).IsRequired();
+            builder.Property(x => x.Status).IsRequired().HasDefaultValue(Status.Active);
 
             builder.HasOne(p => p.ApplicationUser)
                 .WithMany(b => b.Categories)

@@ -24,7 +24,7 @@ namespace MotobikeShop.Controllers
         }
 
         public IActionResult Index() =>
-            View(homeRepository.GetCategories());
+            View(homeRepository.Categories);
 
         public IActionResult Privacy()
         {

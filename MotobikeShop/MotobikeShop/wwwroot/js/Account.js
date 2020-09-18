@@ -79,7 +79,7 @@ $(".custom-file-input").on("change", function () {
 });
 
 $(document).ready(function () {
-    $("#IndexAccount").dataTable(
+    $("#tAccount").dataTable(
         {
             "columnDefs": [
                 {

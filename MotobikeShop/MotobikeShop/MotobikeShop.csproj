@@ -34,7 +34,6 @@
     <None Include="Views\Category\Create.cshtml" />
     <None Include="Views\Category\Edit.cshtml" />
     <None Include="Views\Category\Index.cshtml" />
-    <None Include="Views\Category\MoveDefaultToAnother.cshtml" />
     <None Include="Views\Category\WatchProducts.cshtml" />
     <None Include="Views\OrderDetail\Create.cshtml" />
     <None Include="Views\OrderDetail\Edit.cshtml" />

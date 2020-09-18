@@ -5,7 +5,7 @@ namespace MotobikeShop.Repositories
 {
     public interface IHomeRepository
     {
-        List<Category> GetCategories();
+        List<Category> Categories { get; }
 
         List<Product> GetProductsByCateId(int id);
     }
