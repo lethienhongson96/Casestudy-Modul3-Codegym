@@ -21,5 +21,9 @@ namespace MotobikeShop.Repositories
         EditProductView FindProductToView(int id);
 
         int UpdateProduct(EditProductView productView);
+
+        List<ReStoreView> GetInActiveProducts();
+
+        int RestoreProducts(List<ReStoreView> reStoreCategoryViews);
     }
 }

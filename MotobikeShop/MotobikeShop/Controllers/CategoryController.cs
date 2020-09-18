@@ -51,7 +51,6 @@ namespace MotobikeShop.Controllers
 
                 ModelState.AddModelError("", TextErrorToView.WrongMess);
             }
-
             return View();
         }
 
@@ -75,14 +74,19 @@ namespace MotobikeShop.Controllers
         [HttpGet]
         public IActionResult Restore() => View(categoryRepository.GetInActiveCategories());
 
-        
+
         [HttpPost]
-        public IActionResult Restore(List<ReStoreCategoryView> reStoreCategoryViews)
+        public IActionResult Restore(List<ReStoreView> reStoreCategoryViews)
         {
-            if (categoryRepository.RestoreCategories(reStoreCategoryViews) > 0)
-                return RedirectToAction("Index","Category");
+            int result = categoryRepository.RestoreCategories(reStoreCategoryViews);
+
+            if (result > 0 || result == 0)
+                return RedirectToAction("Index", "Category");
+
+            ModelState.AddModelError("", TextErrorToView.WrongMess);
 
             return View(reStoreCategoryViews);
+
         }
     }
 }

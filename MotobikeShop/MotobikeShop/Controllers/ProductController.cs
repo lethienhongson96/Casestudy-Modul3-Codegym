@@ -11,15 +11,15 @@ namespace MotobikeShop.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductRepository productRepository;
 
         public ProductController(IProductRepository productRepository)
         {
-            _productRepository = productRepository;
+            this.productRepository = productRepository;
         }
         public IActionResult Index()
         {
-            return View(_productRepository.ProductList);
+            return View(productRepository.ProductList);
         }
 
         [HttpGet]
@@ -30,7 +30,7 @@ namespace MotobikeShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_productRepository.CreateProduct(productView) > 0)
+                if (productRepository.CreateProduct(productView) > 0)
                     return RedirectToAction("Index", "Product");
 
                 ModelState.AddModelError("", TextErrorToView.WrongMess);
@@ -41,23 +41,39 @@ namespace MotobikeShop.Controllers
         [Route("/Product/Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            var result = _productRepository.DeleteProduct(id);
+            var result = productRepository.DeleteProduct(id);
             return Json(new { result });
         }
 
         [HttpGet]
-        public IActionResult Edit(int id) =>
-            View(_productRepository.FindProductToView(id));
+        public IActionResult Edit(int id) => View(productRepository.FindProductToView(id));
 
         [HttpPost]
         public IActionResult Edit(EditProductView productView)
         {
             if (ModelState.IsValid)
             {
-                if (_productRepository.UpdateProduct(productView) > 0)
+                if (productRepository.UpdateProduct(productView) > 0)
                     return RedirectToAction("Index", "Product");
             }
             return View(productView);
+        }
+
+        [HttpGet]
+        public IActionResult Restore() => View(productRepository.GetInActiveProducts());
+
+        [HttpPost]
+        public IActionResult Restore(List<ReStoreView> ReStoreViews)
+        {
+            int result = productRepository.RestoreProducts(ReStoreViews);
+
+            if (result > 0 || result == 0)
+                return RedirectToAction("Index", "Product");
+
+            ModelState.AddModelError("", TextErrorToView.WrongMess);
+
+            return View(ReStoreViews);
+
         }
     }
 }

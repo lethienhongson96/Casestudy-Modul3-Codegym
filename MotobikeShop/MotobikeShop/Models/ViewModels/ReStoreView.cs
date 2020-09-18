@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MotobikeShop.Models.ViewModels
 {
-    public class ReStoreCategoryView
+    public class ReStoreView
     {
         public int Id { get; set; }
         public string Name{ get; set; }

@@ -8,18 +8,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MotobikeShop.RepositoryImps
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private const string ProductImageDefault = "default_product_image.png";
 
         public ProductRepository(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
-            _context = context;
+            this.context = context;
             _webHostEnvironment = webHostEnvironment;
         }
         public int CreateProduct(CreateProductView productView)
@@ -35,27 +36,27 @@ namespace MotobikeShop.RepositoryImps
             if (productView.IformfilePath != null)
                 product.ImagePath = UploadedFile(productView.IformfilePath);
 
-            _context.Products.Add(product);
-            return (_context.SaveChanges());
+            context.Products.Add(product);
+            return (context.SaveChanges());
         }
 
         public int DeleteProduct(int id)
         {
-            var product = _context.Products.FirstOrDefault(el => el.Id == id);
+            var product = context.Products.FirstOrDefault(el => el.Id == id);
 
             if (product != null)
             {
                 product.Status = Enums.Status.InActive;
-                _context.Update(product);
+                context.Update(product);
 
-                return _context.SaveChanges();
+                return context.SaveChanges();
             }
             return -1;
         }
 
         public EditProductView FindProductToView(int id)
         {
-            var product = _context.Products.FirstOrDefault(el => el.Id == id);
+            var product = context.Products.FirstOrDefault(el => el.Id == id);
 
             var productview = new EditProductView()
             {
@@ -71,11 +72,11 @@ namespace MotobikeShop.RepositoryImps
             return productview;
         }
 
-        public List<Product> ProductList => _context.Products.ToList().FindAll(el => el.Status == Enums.Status.Active);
+        public List<Product> ProductList => context.Products.ToList().FindAll(el => el.Status == Enums.Status.Active);
 
         public int UpdateProduct(EditProductView productView)
         {
-            var product = _context.Products.FirstOrDefault(el => el.Id == productView.Id);
+            var product = context.Products.FirstOrDefault(el => el.Id == productView.Id);
 
             product.Name = productView.Name;
             product.CategoryId = productView.CategoryId;
@@ -93,8 +94,8 @@ namespace MotobikeShop.RepositoryImps
                     File.Delete(DelPath);
                 }
             }
-            _context.Update(product);
-            return (_context.SaveChanges());
+            context.Update(product);
+            return (context.SaveChanges());
         }
 
         public string UploadedFile(IFormFile formFile)
@@ -110,6 +111,39 @@ namespace MotobikeShop.RepositoryImps
                 formFile.CopyTo(fileStream);
             }
             return uniqueFileName;
+        }
+
+        public List<ReStoreView> GetInActiveProducts()
+        {
+            List<Product> InActiveProducts = context.Products.ToList().FindAll(el => el.Status == Enums.Status.InActive);
+            List<ReStoreView> ReStoreViews = new List<ReStoreView>();
+
+            foreach (var item in InActiveProducts)
+            {
+                var reStoreView = new ReStoreView()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                };
+                ReStoreViews.Add(reStoreView);
+            }
+            return ReStoreViews;
+        }
+
+        public int RestoreProducts(List<ReStoreView> ReStoreViews)
+        {
+            List<Product> products = new List<Product>();
+
+            foreach (var item in ReStoreViews)
+                if (item.IsRestore)
+                {
+                    Product product = context.Products.FirstOrDefault(el => el.Id == item.Id);
+                    product.Status = Enums.Status.Active;
+                    products.Add(product);
+                }
+            context.UpdateRange(products);
+
+            return Task.Run(async () => await context.SaveChangesAsync()).Result;
         }
     }
 }
