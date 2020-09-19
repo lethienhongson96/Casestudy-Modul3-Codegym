@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200919040158_RequiredForEmailFullnamePhoneNumInInfoTable")]
+    partial class RequiredForEmailFullnamePhoneNumInInfoTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,9 +177,6 @@ namespace MotobikeShop.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("InfoId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -284,9 +283,6 @@ namespace MotobikeShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
@@ -317,10 +313,6 @@ namespace MotobikeShop.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique()
-                        .HasFilter("[ApplicationUserId] IS NOT NULL");
 
                     b.ToTable("Infos");
                 });
@@ -527,13 +519,6 @@ namespace MotobikeShop.Migrations
                     b.HasOne("MotobikeShop.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Categories")
                         .HasForeignKey("CreateBy");
-                });
-
-            modelBuilder.Entity("MotobikeShop.Models.Entities.Info", b =>
-                {
-                    b.HasOne("MotobikeShop.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("Info")
-                        .HasForeignKey("MotobikeShop.Models.Entities.Info", "ApplicationUserId");
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.Order", b =>

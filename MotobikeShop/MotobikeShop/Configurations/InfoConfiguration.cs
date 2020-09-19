@@ -12,9 +12,9 @@ namespace MotobikeShop.Configurations
     {
         public void Configure(EntityTypeBuilder<Info> builder)
         {
-            builder.Property(el => el.Email).HasMaxLength(100);
-            builder.Property(el => el.FullName).HasMaxLength(100);
-            builder.Property(el => el.PhoneNum).HasMaxLength(20);
+            builder.Property(el => el.Email).HasMaxLength(100).IsRequired();
+            builder.Property(el => el.FullName).HasMaxLength(100).IsRequired();
+            builder.Property(el => el.PhoneNum).HasMaxLength(20).IsRequired();
         }
     }
 }

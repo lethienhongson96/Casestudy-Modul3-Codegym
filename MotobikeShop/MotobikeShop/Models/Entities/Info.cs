@@ -12,6 +12,9 @@ namespace MotobikeShop.Models.Entities
         public string Email { get; set; }
         public string PhoneNum { get; set; }
 
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
         [MaxLength(200)]
         [Required(ErrorMessage = "Trường này không được bỏ trống")]
         public string HouseNum { get; set; }
