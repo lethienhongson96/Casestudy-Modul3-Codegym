@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MotobikeShop.Migrations
 {
-    public partial class InitEntitiesAndConfigRelationship : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,9 +40,7 @@ namespace MotobikeShop.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FullName = table.Column<string>(maxLength: 100, nullable: false),
-                    Avatar = table.Column<string>(maxLength: 200, nullable: true, defaultValue: "DefaultAvatar.png"),
-                    AddressId = table.Column<int>(nullable: false)
+                    Avatar = table.Column<string>(maxLength: 150, nullable: true, defaultValue: "DefaultAvatar.png")
                 },
                 constraints: table =>
                 {
@@ -60,6 +58,25 @@ namespace MotobikeShop.Migrations
                 },
                 constraints: table =>
                 {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Infos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProvinceId = table.Column<int>(nullable: false),
+                    DistrictId = table.Column<int>(nullable: false),
+                    WardId = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(maxLength: 100, nullable: true),
+                    Email = table.Column<string>(maxLength: 100, nullable: true),
+                    PhoneNum = table.Column<string>(maxLength: 20, nullable: true),
+                    HouseNum = table.Column<string>(maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Infos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,29 +124,6 @@ namespace MotobikeShop.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProvinceId = table.Column<int>(nullable: false),
-                    DistrictId = table.Column<int>(nullable: false),
-                    WardId = table.Column<int>(nullable: false),
-                    HouseNum = table.Column<string>(maxLength: 200, nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Addresses_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,7 +218,7 @@ namespace MotobikeShop.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
-                    Status = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false, defaultValue: 1),
                     CreateAt = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<string>(nullable: true)
                 },
@@ -271,7 +265,7 @@ namespace MotobikeShop.Migrations
                     PricePerUnit = table.Column<double>(nullable: false),
                     CreateAt = table.Column<DateTime>(nullable: false),
                     ImagePath = table.Column<string>(maxLength: 200, nullable: true, defaultValue: "default_product_image.png"),
-                    Status = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false, defaultValue: 1),
                     CategoryId = table.Column<int>(nullable: false),
                     CreateBy = table.Column<string>(nullable: true)
                 },
@@ -319,89 +313,6 @@ namespace MotobikeShop.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Addresses",
-                columns: new[] { "Id", "ApplicationUserId", "DistrictId", "HouseNum", "ProvinceId", "WardId" },
-                values: new object[,]
-                {
-                    { 1, null, 194, "28 Nguyễn Tri Phương", 15, 2724 },
-                    { 2, null, 194, "28 Nguyễn Tri Phương", 15, 2724 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91", "612c52d0-ad6b-45c2-919f-08a631a936ea", "Admin", "Admin" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "AddressId", "Avatar", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "CE6654BD-705E-4D25-8C90-71E2654ADAE8", 0, 1, "DefaultAvatar.png", "8dd7aa13-3ac8-4cce-bf3a-3f7d71a5c50e", "lethienhongson96@gmail.com", true, "Hồng Sơn", false, null, "lethienhongson96@gmail.com", "lethienhongson96@gmail.com", "AQAAAAEAACcQAAAAEKfKZakco4ymBX67aIC/RWRhCcIx9vqISwS8aZTp5WxOYHQLtYbknwZff/+EAvxg3w==", "0982102073", false, "", false, "lethienhongson96@gmail.com" },
-                    { "FC876771-8301-4765-B037-859AA899D708", 0, 2, "DefaultAvatar.png", "6578e915-9159-4e36-9166-d716ccde93c0", "Customer@gmail.com", true, "Nguyễn Văn Vui", false, null, "Customer@gmail.com", "Customer@gmail.com", "AQAAAAEAACcQAAAAEKQCRB2nPzlGN+CM94Z+rusnYUs5OBRi49qIMLP6g3bL3RCDBWuPypR2Aa1DM/8Pwg==", "0984910724", false, "", false, "Customer@gmail.com" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91" });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "CreateAt", "CreateBy", "Name", "Status" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "Iphone", 1 },
-                    { 2, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "SamSung", 1 },
-                    { 3, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "Bphone", 1 },
-                    { 4, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "No Category", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "ApplicationUserId", "CreateAt", "PayStatus", "ShipperDate" },
-                values: new object[,]
-                {
-                    { 1, "FC876771-8301-4765-B037-859AA899D708", new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), 0, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 2, "FC876771-8301-4765-B037-859AA899D708", new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), 0, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 3, "FC876771-8301-4765-B037-859AA899D708", new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), 0, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local) }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "CategoryId", "CreateAt", "CreateBy", "ImagePath", "Name", "PricePerUnit", "Status" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "Iphone 5", 5000000.0, 1 },
-                    { 2, 1, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "Iphone 6", 6000000.0, 1 },
-                    { 3, 1, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "Iphone 7", 7000000.0, 1 },
-                    { 4, 2, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "Galaxy 3", 3000000.0, 1 },
-                    { 5, 2, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "Galaxy 4", 4000000.0, 1 },
-                    { 6, 3, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "BPhone 10", 10000000.0, 1 },
-                    { 7, 3, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Local), "CE6654BD-705E-4D25-8C90-71E2654ADAE8", "default_product_image.png", "BPhone 11", 11000000.0, 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetails",
-                columns: new[] { "OrderId", "ProductId", "PayStatus", "Quantity", "UnitPrice" },
-                values: new object[,]
-                {
-                    { 1, 1, 0, 1, 5000000.0 },
-                    { 1, 2, 0, 2, 12000000.0 },
-                    { 2, 3, 0, 1, 7000000.0 },
-                    { 2, 4, 0, 3, 9000000.0 },
-                    { 3, 5, 0, 1, 4000000.0 },
-                    { 3, 6, 0, 2, 20000000.0 }
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Addresses_ApplicationUserId",
-                table: "Addresses",
-                column: "ApplicationUserId",
-                unique: true,
-                filter: "[ApplicationUserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -471,9 +382,6 @@ namespace MotobikeShop.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -490,6 +398,9 @@ namespace MotobikeShop.Migrations
 
             migrationBuilder.DropTable(
                 name: "district");
+
+            migrationBuilder.DropTable(
+                name: "Infos");
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");

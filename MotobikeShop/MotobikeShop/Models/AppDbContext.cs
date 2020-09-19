@@ -27,10 +27,11 @@ namespace MotobikeShop.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
-        //Address for Account
+        //Info for Account
         public DbSet<District> District { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<Ward> Ward { get; set; }
+        public DbSet<Info> Infos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,9 +47,10 @@ namespace MotobikeShop.Models
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
+            modelBuilder.ApplyConfiguration(new InfoConfiguration());
 
             //seeding data
-            modelBuilder.Seed();
+            //modelBuilder.Seed();
         }
     }
 }

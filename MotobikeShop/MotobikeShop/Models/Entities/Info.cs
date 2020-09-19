@@ -9,6 +9,8 @@ namespace MotobikeShop.Models.Entities
         public int DistrictId { get; set; }
         public int WardId { get; set; }
         public string FullName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNum { get; set; }
 
         [MaxLength(200)]
         [Required(ErrorMessage = "Trường này không được bỏ trống")]
