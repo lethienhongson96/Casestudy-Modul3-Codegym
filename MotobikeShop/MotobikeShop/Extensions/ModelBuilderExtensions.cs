@@ -10,7 +10,7 @@ namespace MotobikeShop.Extensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Address>().HasData(new Address
+            modelBuilder.Entity<Info>().HasData(new Info
             {
                 Id = 1,
                 ProvinceId = 15,
@@ -40,8 +40,6 @@ namespace MotobikeShop.Extensions
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Asdf123!"),
                 SecurityStamp = string.Empty,
-                FullName = "Hồng Sơn",
-                AddressId = 1,
                 Avatar = "DefaultAvatar.png",
                 PhoneNumber = "0982102073"
             });
@@ -129,7 +127,7 @@ namespace MotobikeShop.Extensions
                 });
             #endregion
 
-            modelBuilder.Entity<Address>().HasData(new Address
+            modelBuilder.Entity<Info>().HasData(new Info
             {
                 Id = 2,
                 ProvinceId = 15,
@@ -149,8 +147,6 @@ namespace MotobikeShop.Extensions
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Asdf123!"),
                 SecurityStamp = string.Empty,
-                FullName = "Nguyễn Văn Vui",
-                AddressId = 2,
                 Avatar = "DefaultAvatar.png",
                 PhoneNumber = "0984910724"
             });

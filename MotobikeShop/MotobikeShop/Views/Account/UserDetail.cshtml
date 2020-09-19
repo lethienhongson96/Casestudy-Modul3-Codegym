@@ -9,30 +9,30 @@
         Email: @Model.Email
     </li>
     <li class="list-group-item">
-        Họ Và Tên: @Model.FullName
+        Họ Và Tên: @*@Model.FullName*@
     </li>
     <li class="list-group-item">
         Tỉnh/Thành:
-        @context.Province.FirstOrDefault(el =>
+        @*@context.Province.FirstOrDefault(el =>
         el.Id == context.Addresses.FirstOrDefault(el =>
-        el.Id == Model.AddressId).ProvinceId).Name
+        el.Id == Model.AddressId).ProvinceId).Name*@
     </li>
     <li class="list-group-item">
         Quận/Huyện:
-        @context.District.FirstOrDefault(el =>
+        @*@context.District.FirstOrDefault(el =>
             el.Id == context.Addresses.FirstOrDefault(el =>
-            el.Id == Model.AddressId).DistrictId).Name
+            el.Id == Model.AddressId).DistrictId).Name*@
     </li>
     <li class="list-group-item">
         Xã/Phường:
-        @context.Ward.FirstOrDefault(el =>
+        @*@context.Ward.FirstOrDefault(el =>
             el.Id == context.Addresses.FirstOrDefault(el =>
-            el.Id == Model.AddressId).WardId).Name
+            el.Id == Model.AddressId).WardId).Name*@
     </li>
     <li class="list-group-item">
         Địa Chỉ:
-        @context.Addresses.FirstOrDefault(el =>
-        el.Id == Model.AddressId).HouseNum
+        @*@context.Addresses.FirstOrDefault(el =>
+        el.Id == Model.AddressId).HouseNum*@
     </li>
     <li class="list-group-item">
         Số Điện Thoại:

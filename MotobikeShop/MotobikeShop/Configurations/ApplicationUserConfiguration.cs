@@ -13,18 +13,14 @@ namespace MotobikeShop.Configurations
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.Property(el => el.FullName).IsRequired().HasMaxLength(100);
-
             builder.Property(el => el.Avatar)
                 .IsRequired(false)
-                .HasMaxLength(200)
+                .HasMaxLength(150)
                 .HasDefaultValue("DefaultAvatar.png");
 
-            builder.Property(el => el.AddressId).IsRequired();
-
-            builder.HasOne(s => s.Address)
+           /* builder.HasOne(s => s.Address)
                 .WithOne(ad => ad.ApplicationUser)
-                .HasForeignKey<Address>(ad => ad.ApplicationUserId);
+                .HasForeignKey<Info>(ad => ad.ApplicationUserId);*/
         }
     }
 }

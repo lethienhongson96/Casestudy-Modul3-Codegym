@@ -31,9 +31,9 @@
                     <a asp-controller="Account" asp-action="UserDetail"
                        asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">
                         
-                        @userManager.FindByIdAsync(item.CreateBy).Result.FullName
+                        @*@userManager.FindByIdAsync(item.CreateBy).Result.FullName
                         <img src="~/Images/UserImages/@userManager.FindByIdAsync(item.CreateBy).Result.Avatar"
-                             alt="Alternate Text" style="width:30px;height:30px" />
+                             alt="Alternate Text" style="width:30px;height:30px" />*@
                     </a>
                 </td>
                 <td>

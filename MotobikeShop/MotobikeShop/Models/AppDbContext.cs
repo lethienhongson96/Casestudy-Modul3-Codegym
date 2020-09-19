@@ -31,7 +31,6 @@ namespace MotobikeShop.Models
         public DbSet<District> District { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<Ward> Ward { get; set; }
-        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
