@@ -45,16 +45,28 @@ namespace MotobikeShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                Address address = new Address()
+                {
+                    ProvinceId = model.Province,
+                    DistrictId = model.District,
+                    WardId = model.Ward,
+                    HouseNum = model.HouseNumber
+                };
+                _context.Add(address);
+                await _context.SaveChangesAsync();
+
                 ApplicationUser User = new ApplicationUser()
                 {
                     Avatar = AvatarPathForUser(model.Iformfile_path),
+                    FullName = model.FullName,
                     PhoneNumber = model.PhoneNum,
                     Email = model.Email,
-                    UserName = model.Email
+                    UserName = model.Email,
+                    AddressId = address.Id
                 };
                 var result = await _userManager.CreateAsync(User, model.Password);
 
-                /*address.ApplicationUserId = User.Id;*/
+                address.ApplicationUserId = User.Id;
                 await _context.SaveChangesAsync();
 
                 if (result.Succeeded)
@@ -128,11 +140,14 @@ namespace MotobikeShop.Controllers
         public IActionResult Edit(string id)
         {
             var User = _userManager.FindByIdAsync(id).Result;
+            var address = _context.Addresses.ToList().Find(el => el.Id == User.AddressId);
 
             EditUserView model = new EditUserView()
             {
                 Email = User.Email,
+                FullName = User.FullName,
                 Id = User.Id,
+                Address = address,
                 Avatar_Path = User.Avatar,
                 PhoneNum = User.PhoneNumber
             };
@@ -142,11 +157,22 @@ namespace MotobikeShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserView UserModel)
         {
+            Address address = _context.Addresses.ToList().Find(x => x.Id == UserModel.Address.Id);
+
+            address.ProvinceId = UserModel.Address.ProvinceId;
+            address.DistrictId = UserModel.Address.DistrictId;
+            address.WardId = UserModel.Address.WardId;
+            address.HouseNum = UserModel.Address.HouseNum;
+
+            _context.Update(address);
+            await _context.SaveChangesAsync();
 
             var FindUser = _userManager.FindByIdAsync(UserModel.Id).Result;
 
             FindUser.Email = UserModel.Email;
+            FindUser.FullName = UserModel.FullName;
             FindUser.PhoneNumber = UserModel.PhoneNum;
+            FindUser.Address = address;
             FindUser.Avatar = UserModel.Avatar_Path;
 
             if (UserModel.Iformfile_path != null)
@@ -173,6 +199,9 @@ namespace MotobikeShop.Controllers
             if (existUser == null)
                 return Json(new { deleteResult });
 
+            var address = _context.Addresses.FirstOrDefault(el => el.Id == existUser.AddressId);
+
+            _context.Remove(address);
             //Task.Run(async () => await _context.SaveChangesAsync());
 
             if (existUser.Avatar != AvatarUserDefault)

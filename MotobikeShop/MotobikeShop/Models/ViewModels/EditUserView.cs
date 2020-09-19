@@ -13,7 +13,7 @@ namespace MotobikeShop.Models.ViewModels
         public string FullName { get; set; }
         public string Email { get; set; }
         public string PhoneNum { get; set; }
-        public Info Address { get; set; }
+        public Address Address { get; set; }
         public string Avatar_Path { get; set; }
         public IFormFile Iformfile_path { get; set; }
     }
