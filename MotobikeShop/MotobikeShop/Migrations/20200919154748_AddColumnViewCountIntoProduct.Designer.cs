@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200919154748_AddColumnViewCountIntoProduct")]
+    partial class AddColumnViewCountIntoProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
-                            ConcurrencyStamp = "b39ee200-d9d1-403b-8ed1-2a1bd9848be6",
+                            ConcurrencyStamp = "fc8c5bcf-c6c5-4cf1-bc6a-6b1d1fd83374",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -251,14 +253,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "d0ccb399-e3d3-4478-acd7-b94572d521cb",
+                            ConcurrencyStamp = "bb419508-1fb5-4374-ba49-8200801e70b3",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEANtMD2kohQqCnAWduCYHkmbqCALRn/X90Y3OkoBIT071YfPWflpZSw2N9dNeFjc4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC/mwxiLPrqaQ1wthpBtUZNqlTDNpCzrrOvhv/448o5rc9k3rb5yXQmh+1aqd5+6PQ==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -271,14 +273,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "e85a56d6-c6cd-46e1-9103-b7ec76f0ad5e",
+                            ConcurrencyStamp = "f9c240ba-fee8-471e-a7d1-d3c3100eef15",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPdkCmwqUjP2aNgPfcnPepB0EsfiEDR5Cy+dofgNGvqeoCwZtIwHW4QSN02/I1owEQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAJS9Uv5XAh4NYg+m8xfIcYyA0PqesO2HlUHN98tbmHaLvEdcZOZMCA0Hsj8LarRoQ==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -597,15 +599,15 @@ namespace MotobikeShop.Migrations
                     b.Property<double>("PricePerUnit")
                         .HasColumnType("float");
 
-                    b.Property<int>("SaleCount")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
+
+                    b.Property<int>("ViewCount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -625,8 +627,8 @@ namespace MotobikeShop.Migrations
                             ImagePath = "Honda-XR150.jpg",
                             Name = "Honda XR150",
                             PricePerUnit = 40000000.0,
-                            SaleCount = 0,
-                            Status = 1
+                            Status = 1,
+                            ViewCount = 0
                         },
                         new
                         {
@@ -637,8 +639,8 @@ namespace MotobikeShop.Migrations
                             ImagePath = "Honda-CRF150.jpg",
                             Name = "Honda CRF150",
                             PricePerUnit = 60000000.0,
-                            SaleCount = 0,
-                            Status = 1
+                            Status = 1,
+                            ViewCount = 0
                         },
                         new
                         {
@@ -649,8 +651,8 @@ namespace MotobikeShop.Migrations
                             ImagePath = "WR150.jpg",
                             Name = "WR 150",
                             PricePerUnit = 42000000.0,
-                            SaleCount = 0,
-                            Status = 1
+                            Status = 1,
+                            ViewCount = 0
                         },
                         new
                         {
@@ -661,8 +663,8 @@ namespace MotobikeShop.Migrations
                             ImagePath = "DR150.jpg",
                             Name = "DR 150",
                             PricePerUnit = 45000000.0,
-                            SaleCount = 0,
-                            Status = 1
+                            Status = 1,
+                            ViewCount = 0
                         },
                         new
                         {
@@ -673,8 +675,8 @@ namespace MotobikeShop.Migrations
                             ImagePath = "Klx110.jpg",
                             Name = "KLX 110",
                             PricePerUnit = 50000000.0,
-                            SaleCount = 0,
-                            Status = 1
+                            Status = 1,
+                            ViewCount = 0
                         },
                         new
                         {
@@ -685,8 +687,8 @@ namespace MotobikeShop.Migrations
                             ImagePath = "klx125.jpg",
                             Name = "KLX 125",
                             PricePerUnit = 10000000.0,
-                            SaleCount = 0,
-                            Status = 1
+                            Status = 1,
+                            ViewCount = 0
                         });
                 });
 

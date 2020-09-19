@@ -16,8 +16,9 @@ namespace MotobikeShop.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.SaleCount).IsRequired().HasDefaultValue(0);
 
-            builder.Property(x => x.ImagePath).HasMaxLength(200)
+            builder.Property(x => x.ImagePath).HasMaxLength(150)
                 .IsRequired(false)
                 .HasDefaultValue("default_product_image.png");
 
