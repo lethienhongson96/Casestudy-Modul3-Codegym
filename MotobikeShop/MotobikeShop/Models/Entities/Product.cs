@@ -14,6 +14,7 @@ namespace MotobikeShop.Models.Entities
         public DateTime CreateAt { get; set; }
         public string ImagePath { get; set; }
         public Status Status { get; set; }
+        public int ViewCount { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }

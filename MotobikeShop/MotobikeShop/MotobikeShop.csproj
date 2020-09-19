@@ -12,11 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200919035717_Init.cs" />
-    <Compile Remove="Migrations\20200919035717_Init.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 

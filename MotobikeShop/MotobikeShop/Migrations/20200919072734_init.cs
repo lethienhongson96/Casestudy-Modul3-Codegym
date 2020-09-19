@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MotobikeShop.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,9 @@ namespace MotobikeShop.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Avatar = table.Column<string>(maxLength: 150, nullable: true, defaultValue: "DefaultAvatar.png")
+                    FullName = table.Column<string>(maxLength: 100, nullable: false),
+                    Avatar = table.Column<string>(maxLength: 200, nullable: true, defaultValue: "DefaultAvatar.png"),
+                    AddressId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,25 +60,6 @@ namespace MotobikeShop.Migrations
                 },
                 constraints: table =>
                 {
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Infos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProvinceId = table.Column<int>(nullable: false),
-                    DistrictId = table.Column<int>(nullable: false),
-                    WardId = table.Column<int>(nullable: false),
-                    FullName = table.Column<string>(maxLength: 100, nullable: true),
-                    Email = table.Column<string>(maxLength: 100, nullable: true),
-                    PhoneNum = table.Column<string>(maxLength: 20, nullable: true),
-                    HouseNum = table.Column<string>(maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Infos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,6 +107,30 @@ namespace MotobikeShop.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProvinceId = table.Column<int>(nullable: false),
+                    DistrictId = table.Column<int>(nullable: false),
+                    WardId = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    HouseNum = table.Column<string>(maxLength: 200, nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,14 +249,14 @@ namespace MotobikeShop.Migrations
                     PayStatus = table.Column<int>(nullable: false),
                     CreateAt = table.Column<DateTime>(nullable: false),
                     ShipperDate = table.Column<DateTime>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    CreateBy = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Orders_AspNetUsers_CreateBy",
+                        column: x => x.CreateBy,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -315,6 +322,13 @@ namespace MotobikeShop.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Addresses_ApplicationUserId",
+                table: "Addresses",
+                column: "ApplicationUserId",
+                unique: true,
+                filter: "[ApplicationUserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -364,9 +378,9 @@ namespace MotobikeShop.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ApplicationUserId",
+                name: "IX_Orders_CreateBy",
                 table: "Orders",
-                column: "ApplicationUserId");
+                column: "CreateBy");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -381,6 +395,9 @@ namespace MotobikeShop.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Addresses");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -398,9 +415,6 @@ namespace MotobikeShop.Migrations
 
             migrationBuilder.DropTable(
                 name: "district");
-
-            migrationBuilder.DropTable(
-                name: "Infos");
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");

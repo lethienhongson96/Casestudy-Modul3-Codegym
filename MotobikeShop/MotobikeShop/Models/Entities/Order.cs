@@ -15,7 +15,8 @@ namespace MotobikeShop.Models.Entities
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
 
-        public string ApplicationUserId { get; set; }
+        public string CreateBy { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
     }
 }

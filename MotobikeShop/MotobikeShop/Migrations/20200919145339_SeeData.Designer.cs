@@ -10,8 +10,8 @@ using MotobikeShop.Models;
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200919035818_Init")]
-    partial class Init
+    [Migration("20200919145339_SeeData")]
+    partial class SeeData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,15 @@ namespace MotobikeShop.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
+                            ConcurrencyStamp = "4f540798-ee7e-4c6d-84be-1dc8d054aff2",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -131,6 +140,13 @@ namespace MotobikeShop.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            RoleId = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -160,10 +176,13 @@ namespace MotobikeShop.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Avatar")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200)
                         .HasDefaultValue("DefaultAvatar.png");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -176,6 +195,11 @@ namespace MotobikeShop.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -221,6 +245,102 @@ namespace MotobikeShop.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            AccessFailedCount = 0,
+                            AddressId = 1,
+                            Avatar = "DefaultAvatar.png",
+                            ConcurrencyStamp = "18295147-a5a2-41b1-9b62-b936151f0241",
+                            Email = "lethienhongson96@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Hồng Sơn",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "lethienhongson96@gmail.com",
+                            NormalizedUserName = "lethienhongson96@gmail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB9SGovb5JCzyLPT7Fb5FrHST2fbbKc1UARTWdCATO/epiwKtowCYUC7jxqSmoQR0Q==",
+                            PhoneNumber = "0982102073",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "lethienhongson96@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "FC876771-8301-4765-B037-859AA899D708",
+                            AccessFailedCount = 0,
+                            AddressId = 2,
+                            Avatar = "DefaultAvatar.png",
+                            ConcurrencyStamp = "b31de388-fe6c-4a2b-8862-d1d662de991b",
+                            Email = "Customer@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Nguyễn Văn Vui",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "Customer@gmail.com",
+                            NormalizedUserName = "Customer@gmail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH0XSiV91/X/9VtdNl/KdL2+413E6UwApRduV+op8IaT7RWWwriijcazmtNSQAyhCA==",
+                            PhoneNumber = "0984910724",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Customer@gmail.com"
+                        });
+                });
+
+            modelBuilder.Entity("MotobikeShop.Models.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HouseNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WardId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique()
+                        .HasFilter("[ApplicationUserId] IS NOT NULL");
+
+                    b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DistrictId = 194,
+                            HouseNum = "28 Nguyễn Tri Phương",
+                            ProvinceId = 15,
+                            WardId = 2724
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DistrictId = 194,
+                            HouseNum = "28 Nguyễn Tri Phương",
+                            ProvinceId = 15,
+                            WardId = 2724
+                        });
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.Category", b =>
@@ -251,6 +371,40 @@ namespace MotobikeShop.Migrations
                     b.HasIndex("CreateBy");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            Name = "HonDa",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            Name = "Yamaha",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            Name = "Suzuki",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            Name = "Ktm",
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.District", b =>
@@ -276,44 +430,6 @@ namespace MotobikeShop.Migrations
                     b.ToTable("district");
                 });
 
-            modelBuilder.Entity("MotobikeShop.Models.Entities.Info", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("HouseNum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("PhoneNum")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<int>("ProvinceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WardId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Infos");
-                });
-
             modelBuilder.Entity("MotobikeShop.Models.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -321,11 +437,11 @@ namespace MotobikeShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("PayStatus")
                         .HasColumnType("int");
@@ -335,9 +451,35 @@ namespace MotobikeShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("CreateBy");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "FC876771-8301-4765-B037-859AA899D708",
+                            PayStatus = 0,
+                            ShipperDate = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "FC876771-8301-4765-B037-859AA899D708",
+                            PayStatus = 0,
+                            ShipperDate = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "FC876771-8301-4765-B037-859AA899D708",
+                            PayStatus = 0,
+                            ShipperDate = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local)
+                        });
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.OrderDetail", b =>
@@ -367,6 +509,62 @@ namespace MotobikeShop.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            ProductId = 1,
+                            Discount = 0.0,
+                            PayStatus = 0,
+                            Quantity = 1,
+                            UnitPrice = 5000000.0
+                        },
+                        new
+                        {
+                            OrderId = 1,
+                            ProductId = 2,
+                            Discount = 0.0,
+                            PayStatus = 0,
+                            Quantity = 2,
+                            UnitPrice = 12000000.0
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            ProductId = 3,
+                            Discount = 0.0,
+                            PayStatus = 0,
+                            Quantity = 1,
+                            UnitPrice = 7000000.0
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            ProductId = 4,
+                            Discount = 0.0,
+                            PayStatus = 0,
+                            Quantity = 3,
+                            UnitPrice = 9000000.0
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            ProductId = 5,
+                            Discount = 0.0,
+                            PayStatus = 0,
+                            Quantity = 1,
+                            UnitPrice = 4000000.0
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            ProductId = 6,
+                            Discount = 0.0,
+                            PayStatus = 0,
+                            Quantity = 2,
+                            UnitPrice = 20000000.0
+                        });
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.Product", b =>
@@ -411,6 +609,74 @@ namespace MotobikeShop.Migrations
                     b.HasIndex("CreateBy");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            ImagePath = "Honda-XR150.jpg",
+                            Name = "Honda XR150",
+                            PricePerUnit = 40000000.0,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            ImagePath = "Honda-CRF150.jpg",
+                            Name = "Honda CRF150",
+                            PricePerUnit = 60000000.0,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            ImagePath = "WR150.jpg",
+                            Name = "WR 150",
+                            PricePerUnit = 42000000.0,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            ImagePath = "DR150.jpg",
+                            Name = "DR 150",
+                            PricePerUnit = 45000000.0,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 4,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            ImagePath = "Klx110.jpg",
+                            Name = "KLX 110",
+                            PricePerUnit = 50000000.0,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 4,
+                            CreateAt = new DateTime(2020, 9, 19, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
+                            ImagePath = "klx125.jpg",
+                            Name = "KLX 125",
+                            PricePerUnit = 10000000.0,
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.Province", b =>
@@ -511,6 +777,13 @@ namespace MotobikeShop.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MotobikeShop.Models.Entities.Address", b =>
+                {
+                    b.HasOne("MotobikeShop.Models.ApplicationUser", "ApplicationUser")
+                        .WithOne("Address")
+                        .HasForeignKey("MotobikeShop.Models.Entities.Address", "ApplicationUserId");
+                });
+
             modelBuilder.Entity("MotobikeShop.Models.Entities.Category", b =>
                 {
                     b.HasOne("MotobikeShop.Models.ApplicationUser", "ApplicationUser")
@@ -522,7 +795,7 @@ namespace MotobikeShop.Migrations
                 {
                     b.HasOne("MotobikeShop.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Orders")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("CreateBy");
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.OrderDetail", b =>

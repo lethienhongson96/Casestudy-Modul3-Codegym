@@ -17,6 +17,11 @@ namespace MotobikeShop.Configurations
             builder.Property(el => el.CreateAt).IsRequired();
             builder.Property(el => el.PayStatus).IsRequired();
             builder.Property(el => el.PayStatus).IsRequired();
+
+            builder.HasOne(p => p.ApplicationUser)
+               .WithMany(b => b.Orders)
+               .HasForeignKey(p => p.CreateBy)
+               .IsRequired(false);
         }
     }
 }

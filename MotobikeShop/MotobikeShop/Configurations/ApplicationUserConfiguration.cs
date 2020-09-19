@@ -20,9 +20,11 @@ namespace MotobikeShop.Configurations
                 .HasMaxLength(200)
                 .HasDefaultValue("DefaultAvatar.png");
 
-           /* builder.HasOne(s => s.Address)
+            builder.Property(el => el.AddressId).IsRequired();
+
+            builder.HasOne(s => s.Address)
                 .WithOne(ad => ad.ApplicationUser)
-                .HasForeignKey<Info>(ad => ad.ApplicationUserId);*/
+                .HasForeignKey<Address>(ad => ad.ApplicationUserId);
         }
     }
 }

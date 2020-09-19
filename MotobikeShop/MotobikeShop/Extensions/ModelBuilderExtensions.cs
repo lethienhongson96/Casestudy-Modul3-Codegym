@@ -10,18 +10,21 @@ namespace MotobikeShop.Extensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            const string ADMIN_ID = "CE6654BD-705E-4D25-8C90-71E2654ADAE8";
+            // any guid, but nothing is against to use the same one
+            const string ROLE_ID = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91";
+
             modelBuilder.Entity<Address>().HasData(new Address
             {
                 Id = 1,
                 ProvinceId = 15,
                 DistrictId = 194,
                 WardId = 2724,
-                HouseNum = "28 Nguyễn Tri Phương"
+                HouseNum = "28 Nguyễn Tri Phương",
+                ApplicationUserId= ADMIN_ID
             });
 
-            const string ADMIN_ID = "CE6654BD-705E-4D25-8C90-71E2654ADAE8";
-            // any guid, but nothing is against to use the same one
-            const string ROLE_ID = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91";
+            
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = ROLE_ID,
@@ -129,16 +132,18 @@ namespace MotobikeShop.Extensions
                 });
             #endregion
 
+            var CustomerId = "FC876771-8301-4765-B037-859AA899D708";
+
             modelBuilder.Entity<Address>().HasData(new Address
             {
                 Id = 2,
                 ProvinceId = 15,
                 DistrictId = 194,
                 WardId = 2724,
-                HouseNum = "28 Nguyễn Tri Phương"
-            });
-
-            var CustomerId = "FC876771-8301-4765-B037-859AA899D708";
+                HouseNum = "28 Nguyễn Tri Phương",
+                ApplicationUserId = CustomerId
+            }); ;
+            
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = CustomerId,
@@ -163,7 +168,7 @@ namespace MotobikeShop.Extensions
                     PayStatus = Enums.PayStatus.unpaid,
                     CreateAt = DateTime.Today,
                     ShipperDate = DateTime.Today,
-                    ApplicationUserId = CustomerId
+                    CreateBy = CustomerId
                 },
                 new Order
                 {
@@ -171,7 +176,7 @@ namespace MotobikeShop.Extensions
                     PayStatus = Enums.PayStatus.unpaid,
                     CreateAt = DateTime.Today,
                     ShipperDate = DateTime.Today,
-                    ApplicationUserId = CustomerId
+                    CreateBy = CustomerId
                 },
                 new Order
                 {
@@ -179,7 +184,7 @@ namespace MotobikeShop.Extensions
                     PayStatus = Enums.PayStatus.unpaid,
                     CreateAt = DateTime.Today,
                     ShipperDate = DateTime.Today,
-                    ApplicationUserId = CustomerId
+                    CreateBy = CustomerId
                 });
 
             modelBuilder.Entity<OrderDetail>().HasData(

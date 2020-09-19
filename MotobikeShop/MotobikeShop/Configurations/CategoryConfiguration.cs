@@ -21,8 +21,7 @@ namespace MotobikeShop.Configurations
 
             builder.HasOne(p => p.ApplicationUser)
                 .WithMany(b => b.Categories)
-                .HasForeignKey(p => p.CreateBy)
-                .IsRequired(false);
+                .HasForeignKey(p => p.CreateBy);
         }
     }
 }
