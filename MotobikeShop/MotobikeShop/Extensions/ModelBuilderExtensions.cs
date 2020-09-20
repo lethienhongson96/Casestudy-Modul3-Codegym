@@ -62,6 +62,36 @@ namespace MotobikeShop.Extensions
             new Category { Id = 4, Name = "Ktm", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID }
             );
 
+          
+
+            var CustomerId = "FC876771-8301-4765-B037-859AA899D708";
+
+            modelBuilder.Entity<Address>().HasData(new Address
+            {
+                Id = 2,
+                ProvinceId = 15,
+                DistrictId = 194,
+                WardId = 2724,
+                HouseNum = "28 Nguyễn Tri Phương",
+                ApplicationUserId = CustomerId
+            });
+            
+            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = CustomerId,
+                UserName = "Customer@gmail.com",
+                NormalizedUserName = "Customer@gmail.com",
+                Email = "Customer@gmail.com",
+                NormalizedEmail = "Customer@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Asdf123!"),
+                SecurityStamp = string.Empty,
+                FullName = "Nguyễn Văn Vui",
+                AddressId = 2,
+                Avatar = "DefaultAvatar.png",
+                PhoneNumber = "0984910724"
+            });
+
             #region Create Product
             modelBuilder.Entity<Product>().HasData(
                 new Product
@@ -123,7 +153,7 @@ namespace MotobikeShop.Extensions
                 {
                     Id = 6,
                     Name = "KLX 125",
-                    PricePerUnit = 10000000,
+                    PricePerUnit = 35000000,
                     CreateAt = DateTime.Today,
                     ImagePath = "klx125.jpg",
                     Status = Enums.Status.Active,
@@ -132,33 +162,6 @@ namespace MotobikeShop.Extensions
                 });
             #endregion
 
-            var CustomerId = "FC876771-8301-4765-B037-859AA899D708";
-
-            modelBuilder.Entity<Address>().HasData(new Address
-            {
-                Id = 2,
-                ProvinceId = 15,
-                DistrictId = 194,
-                WardId = 2724,
-                HouseNum = "28 Nguyễn Tri Phương",
-                ApplicationUserId = CustomerId
-            }); ;
-            
-            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
-            {
-                Id = CustomerId,
-                UserName = "Customer@gmail.com",
-                NormalizedUserName = "Customer@gmail.com",
-                Email = "Customer@gmail.com",
-                NormalizedEmail = "Customer@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Asdf123!"),
-                SecurityStamp = string.Empty,
-                FullName = "Nguyễn Văn Vui",
-                AddressId = 2,
-                Avatar = "DefaultAvatar.png",
-                PhoneNumber = "0984910724"
-            });
 
             #region Create Order and OrderDetail
             modelBuilder.Entity<Order>().HasData(
@@ -186,16 +189,16 @@ namespace MotobikeShop.Extensions
                     ShipperDate = DateTime.Today,
                     CreateBy = CustomerId
                 });
-
             modelBuilder.Entity<OrderDetail>().HasData(
-                new OrderDetail { OrderId = 1, ProductId = 1, Quantity = 1, UnitPrice = 5000000, PayStatus = Enums.PayStatus.unpaid },
-                new OrderDetail { OrderId = 1, ProductId = 2, Quantity = 2, UnitPrice = 12000000, PayStatus = Enums.PayStatus.unpaid },
-                new OrderDetail { OrderId = 2, ProductId = 3, Quantity = 1, UnitPrice = 7000000, PayStatus = Enums.PayStatus.unpaid },
-                new OrderDetail { OrderId = 2, ProductId = 4, Quantity = 3, UnitPrice = 9000000, PayStatus = Enums.PayStatus.unpaid },
-                new OrderDetail { OrderId = 3, ProductId = 5, Quantity = 1, UnitPrice = 4000000, PayStatus = Enums.PayStatus.unpaid },
-                new OrderDetail { OrderId = 3, ProductId = 6, Quantity = 2, UnitPrice = 20000000, PayStatus = Enums.PayStatus.unpaid }
+                new OrderDetail { OrderId = 1, ProductId = 1, Quantity = 1, UnitPrice = 40000000, PayStatus = Enums.PayStatus.unpaid },
+                new OrderDetail { OrderId = 1, ProductId = 2, Quantity = 2, UnitPrice = 120000000, PayStatus = Enums.PayStatus.unpaid },
+                new OrderDetail { OrderId = 2, ProductId = 3, Quantity = 1, UnitPrice = 42000000, PayStatus = Enums.PayStatus.unpaid },
+                new OrderDetail { OrderId = 2, ProductId = 4, Quantity = 3, UnitPrice = 135000000, PayStatus = Enums.PayStatus.unpaid },
+                new OrderDetail { OrderId = 3, ProductId = 5, Quantity = 1, UnitPrice = 50000000, PayStatus = Enums.PayStatus.unpaid },
+                new OrderDetail { OrderId = 3, ProductId = 6, Quantity = 2, UnitPrice = 70000000, PayStatus = Enums.PayStatus.unpaid }
                 );
             #endregion
+
         }
     }
 }

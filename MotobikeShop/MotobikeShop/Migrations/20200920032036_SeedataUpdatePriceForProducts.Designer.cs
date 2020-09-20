@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200920032036_SeedataUpdatePriceForProducts")]
+    partial class SeedataUpdatePriceForProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
-                            ConcurrencyStamp = "1427a376-913c-4e71-8248-72c4ec7725af",
+                            ConcurrencyStamp = "32d01ebb-75ea-4233-a233-061a2b83c760",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -251,14 +253,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "9d205463-9d3b-41e0-bfb7-61aa2c8430b1",
+                            ConcurrencyStamp = "b478e468-2a70-408f-86d6-8d56f404413c",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAEj3GVrwD+bCSCudTn6Wwb8WNBKpIS3/x2nEDwW2id33hZbjAc4wsZz+4XSm8gUfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECJ1iUdZVXSyaViFmJaTzTq9RDttqAoKSM3TUmQZ30vf+xQ6mkd1T+5qyC9r9xWSWw==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -271,14 +273,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "88244511-4d1b-41c1-9178-70799e6c9c6e",
+                            ConcurrencyStamp = "8d343d68-38aa-4d6d-8fba-438fe4e5b6de",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN8b1F8DRS6eQ3whEKxo9IswwnXgABW2vHdiXnIMO3kpLLthhTfcUKSosy93nTL7hA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI1d/gmiphkQsGGR2eJmCQwjk2GImHvQmn+p7cMJi67T+kHC3X5kBvaIqq+lQTBeeA==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",

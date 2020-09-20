@@ -1,5 +1,7 @@
-﻿using MotobikeShop.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using MotobikeShop.Models;
 using MotobikeShop.Models.Entities;
+using MotobikeShop.Models.ViewModels;
 using MotobikeShop.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,43 +12,81 @@ namespace MotobikeShop.RepositoryImps
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IOrderDetailRepository detailRepository;
 
-        public OrderRepository(AppDbContext context)
+        public OrderRepository(AppDbContext context,UserManager<ApplicationUser> userManager,
+            IOrderDetailRepository detailRepository)
         {
-            _context = context;
+            this.context = context;
+            this.userManager = userManager;
+            this.detailRepository = detailRepository;
         }
         public int CreateOrder(Order order)
         {
-            _context.Add(order);
-            return (_context.SaveChanges());
+            context.Add(order);
+            return (context.SaveChanges());
         }
 
         public int DeleteOrder(int id)
         {
-            var order = _context.Orders.FirstOrDefault(el => el.Id == id);
+            var order = context.Orders.FirstOrDefault(el => el.Id == id);
 
             if (order == null)
                 return -1;
-            _context.Remove(order);
+            context.Remove(order);
 
-            return _context.SaveChanges();
+            return context.SaveChanges();
+        }
+
+        public ConfirmPayView GetConfirmInfo(int id)
+        {
+            Order order = context.Orders.FirstOrDefault(el => el.Id == id);
+
+            ConfirmPayView confirmPay = new ConfirmPayView()
+            {
+                NameCustomer = userManager.FindByIdAsync(order.CreateBy).Result.FullName,
+                CreateAt = order.CreateAt.ToString(),
+                ShipDate = order.ShipperDate.ToString(),
+                Total = GetTotalInAOrder(order)
+            };
+            return confirmPay;
         }
 
         public Order GetOrder(int id)
         {
-            return _context.Orders.FirstOrDefault(el => el.Id == id);
+            return context.Orders.FirstOrDefault(el => el.Id == id);
         }
 
-        public List<Order> GetOrderList()
+        public List<Order> GetOrderList() => context.Orders.ToList().FindAll(el => el.PayStatus == Enums.PayStatus.unpaid);
+
+        public double GetTotalInAOrder(Order order)
         {
-            return _context.Orders.ToList();
+            var orderDetails = context.OrderDetails.ToList().FindAll(el => el.OrderId == order.Id);
+
+            double total = new double();
+            foreach (var item in orderDetails)
+            {
+                var product = context.Products.FirstOrDefault(el => el.Id == item.ProductId);
+                total += detailRepository.CalculateMoney(product.PricePerUnit, item.Discount, item.Quantity);
+            }
+            return total;
+        }
+
+        public int PayOrder(int id)
+        {
+            var order = context.Orders.FirstOrDefault(el => el.Id == id);
+            order.PayStatus = Enums.PayStatus.Paid;
+            context.Update(order);
+
+            return Task.Run(async () => await context.SaveChangesAsync()).Result;
         }
 
         public int UpdateOrder(Order order)
         {
-            _context.Update(order);
-            return _context.SaveChanges();
+            context.Update(order);
+            return context.SaveChanges();
         }
     }
 }

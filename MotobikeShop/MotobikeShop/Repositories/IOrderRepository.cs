@@ -1,4 +1,5 @@
 ﻿using MotobikeShop.Models.Entities;
+using MotobikeShop.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,11 @@ namespace MotobikeShop.Repositories
         Order GetOrder(int id);
 
         int UpdateOrder(Order order);
+
+        ConfirmPayView GetConfirmInfo(int id);
+
+        double GetTotalInAOrder(Order order);
+
+        int PayOrder(int id);
     }
 }

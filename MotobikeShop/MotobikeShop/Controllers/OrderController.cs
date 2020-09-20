@@ -61,5 +61,26 @@ namespace MotobikeShop.Controllers
 
             return View(order);
         }
+
+        [Route("/Order/ConfirmPay/{id}")]
+        public IActionResult ConfirmPay(int id)
+        {
+            List<string> result = new List<string>();
+            var confirmm = orderRepository.GetConfirmInfo(id);
+
+            result.Add(confirmm.NameCustomer);
+            result.Add(confirmm.CreateAt);
+            result.Add(confirmm.ShipDate);
+            result.Add(confirmm.Total.ToString());
+
+            return Json(new { result });
+        }
+
+        [Route("/Order/Pay/{id}")]
+        public IActionResult Pay(int id)
+        {
+            var result = orderRepository.PayOrder(id);
+            return Json(new { result });
+        }
     }
 }
