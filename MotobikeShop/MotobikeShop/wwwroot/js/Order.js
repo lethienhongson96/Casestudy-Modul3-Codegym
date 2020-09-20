@@ -74,6 +74,9 @@ Order.ConfirmPay = function (id) {
     })
 }
 
+Order.GetAmount = function (id) {
+    $("#CartNum").html(parseInt($("#CartNum").text(), 10) + parseInt($("#Amount").val(),10));
+}
 
 $(document).ready(function () {
     $("#OrderIndex").dataTable(
