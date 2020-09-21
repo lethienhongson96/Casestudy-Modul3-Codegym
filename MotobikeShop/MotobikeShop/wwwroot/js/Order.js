@@ -74,8 +74,17 @@ Order.ConfirmPay = function (id) {
     })
 }
 
-Order.GetAmount = function (id) {
-    $("#CartNum").html(parseInt($("#CartNum").text(), 10) + parseInt($("#Amount").val(),10));
+Order.Buy = function (id) {
+    var amount = $(`#${id}`).val();
+    var UserId = $("#UserId").val();
+    $.ajax({
+        url: `/Order/Buy/${id}/${amount}/${UserId}`,
+        method: "GET",
+        contentType: 'json',
+        success: function (data) { console.log(data); }
+    });
+
+    /*$("#CartNum").html(parseInt($("#CartNum").text(), 10) + parseInt($("#Amount").val(),10));*/
 }
 
 $(document).ready(function () {

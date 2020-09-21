@@ -11,18 +11,20 @@ using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
 {
-    [AllowAnonymous]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHomeRepository homeRepository;
 
+        
         public HomeController(ILogger<HomeController> logger, IHomeRepository homeRepository)
         {
             _logger = logger;
             this.homeRepository = homeRepository;
         }
 
+        [AllowAnonymous]
         public IActionResult Index() =>
             View(homeRepository.Categories);
 
@@ -38,6 +40,11 @@ namespace MotobikeShop.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Buy(int id, int amount)
+        {
+            return Json(amount);
         }
     }
 }

@@ -24,22 +24,28 @@
                     <div class="pl-0 pt-0 card-header chart-grid__header" style="text-align:center">
                         @item.Name
                     </div>
-
+                    @{
+                        var productsInCategory = ListProduct.FindAll(el => el.CategoryId == item.Id);
+                        int i = 0;
+                    }
                     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                            @if (i == 0)
+                            {
+                                @for (int j = 0; j < productsInCategory.Count-1; j++)
+                                {
+                                    if (j == 0)
+                                    {
+                                        <li data-target="#carouselExampleCaptions" data-slide-to="@j" class="active"></li>
+                                    }
+                                    <li data-target="#carouselExampleCaptions" data-slide-to="@j"></li>
+                                }
+                            }
                         </ol>
                         <div class="carousel-inner">
-                            @{
-                                var productsInCategory = ListProduct.FindAll(el => el.CategoryId == item.Id);
-                                int i = 0;
-                            }
 
                             @foreach (var product in productsInCategory)
                             {
-
                                 if (i == 0)
                                 {
                                     <div class="carousel-item active layer">
@@ -52,14 +58,16 @@
                                     </div>
                                 }
                                 else
-                                {<div class="carousel-item layer">
+                                {
+                                    <div class="carousel-item layer">
                                         <img src="~/Images/ProductImages/@product.ImagePath"
                                              class="d-block w-100" alt="..." style="height:370px" />
                                         <div class="carousel-caption d-none d-md-block">
                                             <h3>@product.Name</h3>
                                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                                         </div>
-                                    </div>}
+                                    </div>
+                                }
                                 { i++; }
                             }
                         </div>

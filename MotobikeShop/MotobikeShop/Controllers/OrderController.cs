@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MotobikeShop.Enums;
 using MotobikeShop.Models.Entities;
@@ -81,6 +82,20 @@ namespace MotobikeShop.Controllers
         {
             var result = orderRepository.PayOrder(id);
             return Json(new { result });
+        }
+
+        [AllowAnonymous]
+        [Route("/Order/Buy/{id}/{amount}/{UserId}")]
+        public IActionResult Buy(int id,int amount,string UserId)
+        {
+            Order order = new Order()
+            {
+
+            };
+
+            //orderRepository.CreateOrder();
+
+            return Json(new { amount });
         }
     }
 }
