@@ -17,27 +17,31 @@ namespace MotobikeShop.Controllers
             return View(cart);
         }
 
-        public IActionResult AddItem(int productid, int amount)
+        [Route("/Cart/AddItem/{id}/{amount}")]
+        public IActionResult AddItem(int id, int amount)
         {
+            CartItem item = new CartItem() { ProductId = id, Amount = amount };
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
+
             if (cart != null)
             {
-                if (cart.Exists(el => el.ProductId == productid))
-                    cart.Find(el => el.ProductId == productid).Amount += amount;
+                if (cart.Exists(el => el.ProductId == id))
+                {
+                    cart.Find(el => el.ProductId == id).Amount += amount;
+                    return Json(cart.Count);
+                }
                 else
                 {
-                    var item = new CartItem() { ProductId = productid, Amount = amount };
+                    //CartItem item = new CartItem() { ProductId = productid, Amount = amount };
                     cart.Add(item);
                     HttpContext.Session.SetObjectAsJson(CartSession, cart);
+                    return Json(cart.Count);
                 }
             }
-            else
-            {
-                var item = new CartItem() { ProductId = productid, Amount = amount };
-                cart.Add(item);
-                HttpContext.Session.SetObjectAsJson(CartSession, cart);
-            }
-            return RedirectToAction("Index");
+            cart.Add(item);
+            HttpContext.Session.SetObjectAsJson(CartSession, cart);
+
+            return Json(cart.Count);
         }
     }
 }

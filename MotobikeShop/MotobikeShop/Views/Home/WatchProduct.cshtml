@@ -25,8 +25,9 @@
                             praesentium aut, labore veritatis. Eaque, similique aspernatur. Perferendis doloremque ut
                             praesentium vel voluptatum quasi dolor explicabo nobis ex?
                         </p>
-                        <a asp-controller="Cart" asp-action="AddItem" asp-route-productid="@item.Id" asp-route-amount="2"
-                           class="btn btn-style btn-primary">
+                        <input type="hidden" value="@signInManager.UserManager.GetUserAsync(User).Result.Id" id="UserId" />
+
+                        <a href="javascript:void(0)" onclick="Cart.AddItem(@item.Id)" class="btn btn-style btn-primary">
                             Mua Ngay
                         </a>
                         Số lượng <input type="number" class="btn btn-style border-btn" id="@item.Id" style="width:100px" value="1" />
@@ -55,8 +56,7 @@
                         </p>
                         <input type="hidden" value="@signInManager.UserManager.GetUserAsync(User).Result.Id" id="UserId" />
 
-                        <a asp-controller="Cart" asp-action="AddItem" asp-route-productid="@item.Id" asp-route-amount="2"
-                           class="btn btn-style btn-primary">
+                        <a href="javascript:void(0)" onclick="Cart.AddItem(@item.Id)" class="btn btn-style btn-primary">
                             Mua Ngay
                         </a>
                         Số lượng <input type="number" class="btn btn-style border-btn" id="@item.Id" style="width:100px" value="1" />
@@ -69,5 +69,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/Order.js" asp-append-version="true"></script>
+    <script src="~/js/Cart.js" asp-append-version="true"></script>
 }
