@@ -25,7 +25,7 @@
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@item.PricePerUnit</td>
+                <td>@item.PricePerUnit.ToString("N0")</td>
                 <td>@item.CreateAt</td>
                 <td>
                     <a asp-controller="Account" asp-action="UserDetail"
@@ -45,7 +45,6 @@
 
                 <td>
                     <a asp-action="Edit" asp-controller="Product" asp-route-id="@item.Id">Edit</a>
-
                     <a href="javascript:void(0)" class="text-danger" onclick="Product.delete(@item.Id)">Delete</a>
                 </td>
             </tr>

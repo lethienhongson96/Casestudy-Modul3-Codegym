@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MotobikeShop.Models;
+using MotobikeShop.Models.CartSession;
 using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
@@ -25,16 +26,23 @@ namespace MotobikeShop.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index() =>
-            View(homeRepository.Categories);
+        public IActionResult Index()
+        {
+            HttpContext.Session.SetObjectAsJson("CartSession", new List<CartItem>());
+            return View(homeRepository.Categories);
+        }
+            
 
         public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult WatchProduct(int id) =>
-             View(homeRepository.GetProductsByCateId(id));
+        public IActionResult WatchProduct(int id)
+        {
+            return View(homeRepository.GetProductsByCateId(id));
+        }
+             
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -44,7 +52,7 @@ namespace MotobikeShop.Controllers
 
         public IActionResult Buy(int id, int amount)
         {
-            return Json(amount);
+            return Json(amount,id);
         }
     }
 }

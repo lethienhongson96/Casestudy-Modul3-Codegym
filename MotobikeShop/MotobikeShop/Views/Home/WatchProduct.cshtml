@@ -25,10 +25,11 @@
                             praesentium aut, labore veritatis. Eaque, similique aspernatur. Perferendis doloremque ut
                             praesentium vel voluptatum quasi dolor explicabo nobis ex?
                         </p>
-                        <a href="javascript:void(0)" onclick="Order.Buy(@item.Id)" class="btn btn-style btn-primary">
+                        <a asp-controller="Cart" asp-action="AddItem" asp-route-productid="@item.Id" asp-route-amount="2"
+                           class="btn btn-style btn-primary">
                             Mua Ngay
                         </a>
-                        Số lượng <input type="number" class="btn btn-style border-btn" style="width:100px" id="@item.Id" value="1" />
+                        Số lượng <input type="number" class="btn btn-style border-btn" id="@item.Id" style="width:100px" value="1" />
                     </div>
                     <div class="col-lg-6 pl-lg-4 mt-lg-0 mt-4">
                         <img src="~/Images/ProductImages/@item.ImagePath" alt="" class="img-fluid rounded" />
@@ -52,8 +53,10 @@
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusa ntium corrupti
                             neque sunt labore veritatis.
                         </p>
-                        <input type="hidden" value="@signInManager.UserManager.GetUserAsync(User).Result.Id" id="UserId"/>
-                        <a href="javascript:void(0)" onclick="Order.Buy(@item.Id)" class="btn btn-style btn-primary">
+                        <input type="hidden" value="@signInManager.UserManager.GetUserAsync(User).Result.Id" id="UserId" />
+
+                        <a asp-controller="Cart" asp-action="AddItem" asp-route-productid="@item.Id" asp-route-amount="2"
+                           class="btn btn-style btn-primary">
                             Mua Ngay
                         </a>
                         Số lượng <input type="number" class="btn btn-style border-btn" id="@item.Id" style="width:100px" value="1" />

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace MotobikeShop.Models
 {
+    [Serializable]
     public class CartItem
     {
         public int ProductId { get; set; }

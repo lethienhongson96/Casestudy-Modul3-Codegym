@@ -51,6 +51,11 @@ namespace MotobikeShop.Controllers
         [HttpPost]
         public IActionResult Edit(EditProductView productView)
         {
+            if (productView.Price <= 0)
+            {
+                ModelState.AddModelError("","Số tiền không hợp lệ");
+                return View(productView);
+            }
             if (ModelState.IsValid)
             {
                 if (productRepository.UpdateProduct(productView) > 0)
