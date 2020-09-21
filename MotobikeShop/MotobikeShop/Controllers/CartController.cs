@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MotobikeShop.Models;
 using MotobikeShop.Models.CartSession;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MotobikeShop.Controllers
 {
@@ -23,16 +24,15 @@ namespace MotobikeShop.Controllers
             CartItem item = new CartItem() { ProductId = id, Amount = amount };
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
 
-            if (cart != null)
+            if (cart.Count != 0)
             {
-                if (cart.Exists(el => el.ProductId == id))
+                if (cart.Contains(item))
                 {
-                    cart.Find(el => el.ProductId == id).Amount += amount;
-                    return Json(cart.Count);
+                    cart.FirstOrDefault(el => el.ProductId == item.ProductId).Amount += amount;
+                    return Json(0);
                 }
                 else
                 {
-                    //CartItem item = new CartItem() { ProductId = productid, Amount = amount };
                     cart.Add(item);
                     HttpContext.Session.SetObjectAsJson(CartSession, cart);
                     return Json(cart.Count);

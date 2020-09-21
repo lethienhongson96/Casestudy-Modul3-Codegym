@@ -9,9 +9,12 @@ Cart.AddItem = function (id) {
         contentType: 'json',
         success: function (data) {
             console.log(data);
-            if (data > 0) {
+            if (data == 0) {
                 bootbox.alert("<p style:'color:green'>Thêm Sản Phẩm Thành Công</p>");
-                $("#CartNum").html(parseInt($("#CartNum").text(), 10) + parseInt(amount, 10));
+
+            } else {
+                bootbox.alert("<p style:'color:green'>Thêm Sản Phẩm Thành Công</p>");
+                $("#CartNum").html(parseInt($("#CartNum").text(), 10) + parseInt(1, 10));
             }
         }
     });

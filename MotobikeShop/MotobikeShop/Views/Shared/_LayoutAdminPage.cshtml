@@ -1,6 +1,11 @@
 ﻿
 @inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager;
+@using Microsoft.AspNetCore.Http
+@using MotobikeShop.Models.CartSession
+@inject IHttpContextAccessor HttpContextAccessor
+
 @{
+    var cart= HttpContextAccessor.HttpContext.Session.GetObjectFromJson<List<CartItem>>("CartSession");
     var CurrentAccount = _signInManager.UserManager.GetUserAsync(User).Result;
 }
 <!doctype html>
@@ -177,14 +182,16 @@
                     <div>
                         <a asp-controller="Cart" asp-action="Index">
                             <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-top:20px"></i>
-                            <span style="color:red;padding-left:1px;" id="CartNum">0</span>
+                            <span style="color:red;padding-left:1px;" id="CartNum">
+                                @cart.Count
+                            </span>
                         </a>
                     </div>
                 </div>
             </div>
             <!--notification menu end -->
         </div>
-      
+
         <!-- //header-ends -->
         <!-- main content start -->
         <div class="main-content">
