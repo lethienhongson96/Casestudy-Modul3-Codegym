@@ -29,7 +29,7 @@ namespace MotobikeShop.Controllers
                 if (cart.Contains(item))
                 {
                     cart.FirstOrDefault(el => el.ProductId == item.ProductId).Amount += amount;
-                    return Json(0);
+                    return Json(-1);
                 }
                 else
                 {

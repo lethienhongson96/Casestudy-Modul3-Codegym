@@ -25,6 +25,9 @@ namespace MotobikeShop.RepositoryImps
         }
         public int CreateProduct(CreateProductView productView)
         {
+            if (context.Products.ToList().Exists(el => el.Name == productView.Name))
+                return -1;
+
             Product product = new Product()
             {
                 Name = productView.Name,

@@ -20,6 +20,9 @@ namespace MotobikeShop.RepositoryImps
 
         public int CreateCategory(Category category)
         {
+            if (context.Categories.ToList().Exists(el => el.Name == category.Name))
+                return -1;
+
             context.Add(category);
             return (context.SaveChanges());
         }

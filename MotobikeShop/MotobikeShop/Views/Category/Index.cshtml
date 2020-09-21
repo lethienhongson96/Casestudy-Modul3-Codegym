@@ -31,8 +31,6 @@
                        asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">
 
                         @userManager.FindByIdAsync(item.CreateBy).Result.FullName
-                        <img src="~/Images/UserImages/@userManager.FindByIdAsync(item.CreateBy).Result.Avatar"
-                             alt="Alternate Text" style="width:27px;height:27px" />
                     </a>
                 </td>
                 <td>

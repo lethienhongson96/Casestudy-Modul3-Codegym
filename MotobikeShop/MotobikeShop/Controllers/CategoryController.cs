@@ -30,6 +30,11 @@ namespace MotobikeShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (categoryRepository.CreateCategory(category)==-1)
+                {
+                    ModelState.AddModelError("", "Tên Danh Mục Đả Tồn Tại");
+                    return View(category);
+                }
                 if (categoryRepository.CreateCategory(category) > 0)
                     return RedirectToAction("Index", "Category");
 
