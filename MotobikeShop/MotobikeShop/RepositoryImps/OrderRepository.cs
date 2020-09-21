@@ -49,6 +49,9 @@ namespace MotobikeShop.RepositoryImps
                     UnitPrice= product.PricePerUnit*amount
                 };
                 context.Add(orderDetail);
+
+                product.SaleCount += amount;
+                context.Update(product);
             }
             return context.SaveChanges();
         }
@@ -78,10 +81,7 @@ namespace MotobikeShop.RepositoryImps
             return confirmPay;
         }
 
-        public Order GetOrder(int id)
-        {
-            return context.Orders.FirstOrDefault(el => el.Id == id);
-        }
+        public Order GetOrder(int id) => context.Orders.FirstOrDefault(el => el.Id == id);
 
         public List<Order> GetOrderList() => context.Orders.ToList().FindAll(el => el.PayStatus == Enums.PayStatus.unpaid);
 

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using MotobikeShop.Models;
 using MotobikeShop.Repositories;
 using MotobikeShop.RepositoryImps;
+using System;
 
 namespace MotobikeShop
 {
@@ -47,6 +48,11 @@ namespace MotobikeShop
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddSession(options => {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +71,7 @@ namespace MotobikeShop
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
