@@ -81,7 +81,12 @@ Order.Buy = function (id) {
         url: `/Order/Buy/${id}/${amount}/${UserId}`,
         method: "GET",
         contentType: 'json',
-        success: function (data) { console.log(data); }
+        success: function (data) {
+            console.log(data);
+            if (data > 0) {
+                bootbox.alert("<p style:'color:green'>Đặt hàng thành công</p>");
+            }
+        }
     });
 
     /*$("#CartNum").html(parseInt($("#CartNum").text(), 10) + parseInt($("#Amount").val(),10));*/

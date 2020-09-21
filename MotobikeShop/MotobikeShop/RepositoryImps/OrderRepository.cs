@@ -29,6 +29,30 @@ namespace MotobikeShop.RepositoryImps
             return (context.SaveChanges());
         }
 
+        public int CreateOrderDetailInOrder(int id, int amount, string UserId)
+        {
+            Order order = new Order()
+            {
+                CreateAt = DateTime.Today,
+                CreateBy = UserId,
+                ShipperDate = DateTime.Today
+            };
+            Product product = context.Products.FirstOrDefault(el=>el.Id==id);
+
+            if (CreateOrder(order) > 0)
+            {
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    OrderId = order.Id,
+                    ProductId = id,
+                    Quantity = amount,
+                    UnitPrice= product.PricePerUnit*amount
+                };
+                context.Add(orderDetail);
+            }
+            return context.SaveChanges();
+        }
+
         public int DeleteOrder(int id)
         {
             var order = context.Orders.FirstOrDefault(el => el.Id == id);

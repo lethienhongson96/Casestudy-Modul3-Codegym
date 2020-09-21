@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MotobikeShop.Enums;
 using MotobikeShop.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace MotobikeShop.Configurations
             builder.Property(el => el.UnitPrice).IsRequired();
 
             builder.Property(el => el.Discount).HasDefaultValue(0);
+            builder.Property(el => el.PayStatus).HasDefaultValue(PayStatus.unpaid);
 
             builder.HasOne(bc => bc.Order)
                 .WithMany(b => b.OrderDetails)

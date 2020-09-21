@@ -24,5 +24,7 @@ namespace MotobikeShop.Repositories
         double GetTotalInAOrder(Order order);
 
         int PayOrder(int id);
+
+        int CreateOrderDetailInOrder(int id, int amount, string UserId);
     }
 }

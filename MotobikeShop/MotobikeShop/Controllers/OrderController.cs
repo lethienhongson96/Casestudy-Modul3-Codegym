@@ -47,10 +47,7 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            return View(orderRepository.GetOrder(id));
-        }
+        public IActionResult Edit(int id) => View(orderRepository.GetOrder(id));
 
         [HttpPost]
         public IActionResult Edit(Order order)
@@ -88,14 +85,7 @@ namespace MotobikeShop.Controllers
         [Route("/Order/Buy/{id}/{amount}/{UserId}")]
         public IActionResult Buy(int id,int amount,string UserId)
         {
-            Order order = new Order()
-            {
-
-            };
-
-            //orderRepository.CreateOrder();
-
-            return Json(new { amount });
+            return Json(orderRepository.CreateOrderDetailInOrder(id,amount,UserId));
         }
     }
 }
