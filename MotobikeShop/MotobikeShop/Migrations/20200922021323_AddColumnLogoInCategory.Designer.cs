@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200922021323_AddColumnLogoInCategory")]
+    partial class AddColumnLogoInCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
-                            ConcurrencyStamp = "062b4746-9b22-42e6-8530-d2d7a55e5303",
+                            ConcurrencyStamp = "32bc3d7c-a47b-4991-97dc-48b51186d96c",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -251,14 +253,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "391decd7-806a-4e56-95a0-19e92c7aa710",
+                            ConcurrencyStamp = "62222744-ef34-447b-96d6-4efcb07c3a38",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJMhN5bhcbcbnFsMDAVm88HNgh445448DIlW7a8JSkX1fvAClQOPUeFN+5NJzK7TFQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJeCMHlKXk7Q7eoTefWL2m1kDZP3ddd0peTBhboZkiH0p5EPM63XiLVAk4aX2WTLPg==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -271,14 +273,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "4b077b1c-7ed3-4fb5-9407-a6a1dc055a1e",
+                            ConcurrencyStamp = "cc416a48-1880-471c-b078-5db4b5d248b0",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHRgmRQp0kgDcSU4+iEVVrem0sEkq/gOlg7awQYeje4VoDF6GBU9AQfGMfiQk58XdQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI0g9BzdQRhT6f6rMOxqeStJkB8miTrSH8DDbzQMAxIo5Z5Ru3bIT7LdSGUP09BYdg==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -356,13 +358,6 @@ namespace MotobikeShop.Migrations
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250)
-                        .HasDefaultValue("");
-
                     b.Property<string>("Logo")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -392,7 +387,6 @@ namespace MotobikeShop.Migrations
                             Id = 1,
                             CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Hãng Xe Honda xuất xứ ở nhật, tiết kiệm nhiên liệu",
                             Logo = "Honda-Logo-Wallpapers-Full-Download.jpg",
                             Name = "HonDa",
                             Status = 1
@@ -402,7 +396,6 @@ namespace MotobikeShop.Migrations
                             Id = 2,
                             CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Thiết kế phong cách thể thao",
                             Logo = "YamahaBackground.jpg",
                             Name = "Yamaha",
                             Status = 1
@@ -412,8 +405,7 @@ namespace MotobikeShop.Migrations
                             Id = 3,
                             CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Dành cho người thích tốc độ",
-                            Logo = "SuzukiLogo.jpg",
+                            Logo = "LogoDefault.png",
                             Name = "Suzuki",
                             Status = 1
                         },
@@ -422,29 +414,8 @@ namespace MotobikeShop.Migrations
                             Id = 4,
                             CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Dành cho người chơi cào cào chuyên nghiệp",
-                            Logo = "ktmLogo.jpg",
+                            Logo = "LogoDefault.png",
                             Name = "Ktm",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Vượt địa hình hiểm trở",
-                            Logo = "KawasakiLogo.jpg",
-                            Name = "Kawasaki",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Hãng xe cào cào nổi tiếng trong nhiều năm qua",
-                            Logo = "BetaLogo.jpg",
-                            Name = "Beta",
                             Status = 1
                         });
                 });

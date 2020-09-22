@@ -1,4 +1,9 @@
-﻿
+﻿@inject AppDbContext context;
+
+@{
+    var MaxSale = context.Products.ToList().Max(x => x.SaleCount);
+    Product ProductTop = context.Products.FirstOrDefault(el => el.SaleCount == MaxSale);
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,7 +131,7 @@
         <!-- /.row -->
         <!-- Portfolio Section -->
         <h2>Portfolio Heading</h2>
-            
+
         <div class="row">
             @RenderBody()
         </div>
@@ -134,21 +139,20 @@
         <!-- Features Section -->
         <div class="row">
             <div class="col-lg-6">
-                <h2>Modern Business Features</h2>
-                <p>The Modern Business template by Start Bootstrap includes:</p>
+                <h2>Sản Phẩm Bán Chạy Nhất</h2>
+                <p>Thống kê trong tháng:</p>
                 <ul>
-                    <li>
-                        <strong>Bootstrap v4</strong>
-                    </li>
-                    <li>jQuery</li>
-                    <li>Font Awesome</li>
-                    <li>Working contact form with validation</li>
-                    <li>Unstyled page elements for easy customization</li>
+                    <li>Lượt truy cập</li>
+                    <li>Lượt mua</li>
+                    <li>Lượt đặt hàng</li>
                 </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+                <p>Tên sản phẩm: <strong>@ProductTop.Name</strong></p>
+                <p>Giá sản phẩm: <strong>@ProductTop.PricePerUnit.ToString("N0")</strong></p>
+                <button>Thêm Vào Giỏ Hàng</button> Số Lượng<input type="number"  value="1"/>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+                <img class="img-fluid rounded" alt=""
+                     src="~/Images/ProductImages/@ProductTop.ImagePath">
             </div>
         </div>
         <!-- /.row -->
@@ -156,15 +160,6 @@
         <hr>
 
         <!-- Call to Action Section -->
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-            </div>
-            <div class="col-md-4">
-                <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-            </div>
-        </div>
-
     </div>
     <!-- /.container -->
     <!-- Footer -->
@@ -178,7 +173,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="~/BusinessLayout/vendor/jquery/jquery.min.js"></script>
     <script src="~/BusinessLayout/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
 
 </html>

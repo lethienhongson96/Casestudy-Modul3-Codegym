@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200922030050_SeedataDescriptionInCate")]
+    partial class SeedataDescriptionInCate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
-                            ConcurrencyStamp = "062b4746-9b22-42e6-8530-d2d7a55e5303",
+                            ConcurrencyStamp = "d528c58d-20c1-4b28-8069-34ba1f269776",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -251,14 +253,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "391decd7-806a-4e56-95a0-19e92c7aa710",
+                            ConcurrencyStamp = "0e2b8ff7-749c-4271-8f69-bf5d2536becd",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJMhN5bhcbcbnFsMDAVm88HNgh445448DIlW7a8JSkX1fvAClQOPUeFN+5NJzK7TFQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFPvZ3Qr/n4F/+b2OBpJD6HSanmjRSefVNsCzjF9i1LCm/uv/QJsJWQIrv+C+zeoYA==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -271,14 +273,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "4b077b1c-7ed3-4fb5-9407-a6a1dc055a1e",
+                            ConcurrencyStamp = "23c66b27-9d75-43f6-9d7c-7f5e0da5e6ab",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHRgmRQp0kgDcSU4+iEVVrem0sEkq/gOlg7awQYeje4VoDF6GBU9AQfGMfiQk58XdQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELYiq+FM64EBspNM6ZR/EVXpIhKC0uGIjyMIsqjril8rFjzqwAPZR4uqFtd6Pw538A==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -413,7 +415,7 @@ namespace MotobikeShop.Migrations
                             CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
                             Description = "Dành cho người thích tốc độ",
-                            Logo = "SuzukiLogo.jpg",
+                            Logo = "LogoDefault.png",
                             Name = "Suzuki",
                             Status = 1
                         },
@@ -423,28 +425,8 @@ namespace MotobikeShop.Migrations
                             CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
                             Description = "Dành cho người chơi cào cào chuyên nghiệp",
-                            Logo = "ktmLogo.jpg",
+                            Logo = "LogoDefault.png",
                             Name = "Ktm",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Vượt địa hình hiểm trở",
-                            Logo = "KawasakiLogo.jpg",
-                            Name = "Kawasaki",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreateAt = new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreateBy = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            Description = "Hãng xe cào cào nổi tiếng trong nhiều năm qua",
-                            Logo = "BetaLogo.jpg",
-                            Name = "Beta",
                             Status = 1
                         });
                 });

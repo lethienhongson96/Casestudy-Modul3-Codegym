@@ -12,6 +12,8 @@ namespace MotobikeShop.Models.Entities
         public string Name { get; set; }
         public Status Status { get; set; }
         public DateTime CreateAt { get; set; }
+        public string Logo { get; set; }
+        public string Description { get; set; }
 
         public string CreateBy { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

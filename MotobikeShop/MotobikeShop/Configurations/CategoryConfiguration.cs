@@ -19,6 +19,9 @@ namespace MotobikeShop.Configurations
 
             builder.Property(x => x.Status).IsRequired().HasDefaultValue(Status.Active);
 
+            builder.Property(x => x.Logo).IsRequired().HasDefaultValue("LogoDefault.png").HasMaxLength(150);
+            builder.Property(x => x.Description).IsRequired().HasMaxLength(250).HasDefaultValue("");
+
             builder.HasOne(p => p.ApplicationUser)
                 .WithMany(b => b.Categories)
                 .HasForeignKey(p => p.CreateBy);

@@ -21,10 +21,10 @@ namespace MotobikeShop.Extensions
                 DistrictId = 194,
                 WardId = 2724,
                 HouseNum = "28 Nguyễn Tri Phương",
-                ApplicationUserId= ADMIN_ID
+                ApplicationUserId = ADMIN_ID
             });
 
-            
+
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = ROLE_ID,
@@ -55,14 +55,72 @@ namespace MotobikeShop.Extensions
                 UserId = ADMIN_ID
             });
 
+            #region Seedata for Category
             modelBuilder.Entity<Category>().HasData(
-            new Category { Id = 1, Name = "HonDa", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
-            new Category { Id = 2, Name = "Yamaha", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
-            new Category { Id = 3, Name = "Suzuki", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID },
-            new Category { Id = 4, Name = "Ktm", Status = Enums.Status.Active, CreateAt = DateTime.Today, CreateBy = ADMIN_ID }
+            new Category
+            {
+                Id = 1,
+                Name = "HonDa",
+                Status = Enums.Status.Active,
+                CreateAt = DateTime.Today,
+                CreateBy = ADMIN_ID,
+                Logo = "Honda-Logo-Wallpapers-Full-Download.jpg",
+                Description="Hãng Xe Honda xuất xứ ở nhật, tiết kiệm nhiên liệu"
+            },
+            new Category
+            {
+                Id = 2,
+                Name = "Yamaha",
+                Status = Enums.Status.Active,
+                CreateAt = DateTime.Today,
+                CreateBy = ADMIN_ID,
+                Logo = "YamahaBackground.jpg",
+                Description = "Thiết kế phong cách thể thao"
+            },
+            new Category
+            {
+                Id = 3,
+                Name = "Suzuki",
+                Status = Enums.Status.Active,
+                CreateAt = DateTime.Today,
+                CreateBy = ADMIN_ID,
+                Logo = "SuzukiLogo.jpg",
+                Description = "Dành cho người thích tốc độ"
+            },
+            new Category
+            {
+                Id = 4,
+                Name = "Ktm",
+                Status = Enums.Status.Active,
+                CreateAt = DateTime.Today,
+                CreateBy = ADMIN_ID,
+                Logo = "ktmLogo.jpg",
+                Description = "Dành cho người chơi cào cào chuyên nghiệp"
+            }
+            ,
+            new Category
+            {
+                Id = 5,
+                Name = "Kawasaki",
+                Status = Enums.Status.Active,
+                CreateAt = DateTime.Today,
+                CreateBy = ADMIN_ID,
+                Logo = "KawasakiLogo.jpg",
+                Description = "Vượt địa hình hiểm trở"
+            }
+            ,
+            new Category
+            {
+                Id = 6,
+                Name = "Beta",
+                Status = Enums.Status.Active,
+                CreateAt = DateTime.Today,
+                CreateBy = ADMIN_ID,
+                Logo = "BetaLogo.jpg",
+                Description = "Hãng xe cào cào nổi tiếng trong nhiều năm qua"
+            }
             );
-
-          
+            #endregion
 
             var CustomerId = "FC876771-8301-4765-B037-859AA899D708";
 
@@ -75,7 +133,7 @@ namespace MotobikeShop.Extensions
                 HouseNum = "28 Nguyễn Tri Phương",
                 ApplicationUserId = CustomerId
             });
-            
+
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = CustomerId,
