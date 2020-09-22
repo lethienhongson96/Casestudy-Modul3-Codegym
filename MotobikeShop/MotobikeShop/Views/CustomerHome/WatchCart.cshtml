@@ -1,0 +1,41 @@
+﻿@model List<CartItem>
+
+@inject AppDbContext context;
+@{
+    List<Product> products = context.Products.ToList();
+
+    double totalOrder = 0;
+}
+
+<table class="table" id="ProductIndex">
+    <thead class="thead-dark" style="text-align:center">
+        <tr>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số Lượng</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Giá</th>
+        </tr>
+    </thead>
+    <tbody style="text-align:center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{ double total = item.Amount * products.Find(el => el.Id == item.ProductId).PricePerUnit; }
+                <td>@products.Find(el => el.Id == item.ProductId).Name</td>
+                <td>@item.Amount</td>
+                <td>
+                <img src="~/Images/ProductImages/@products.Find(el => el.Id == item.ProductId).ImagePath" 
+                     style="height:70px;width:70px"/>
+                </td>
+                <td>@total.ToString("N0")</td>
+                @{totalOrder += total; }
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Tổng Tiền: <span class="text-danger">@totalOrder.ToString("N0")</span></td>
+        </tr>
+    </tbody>
+</table>

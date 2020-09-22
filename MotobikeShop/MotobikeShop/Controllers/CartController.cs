@@ -26,9 +26,10 @@ namespace MotobikeShop.Controllers
 
             if (cart.Count != 0)
             {
-                if (cart.Contains(item))
+                if (cart.Exists(el=>el.ProductId== item.ProductId))
                 {
                     cart.FirstOrDefault(el => el.ProductId == item.ProductId).Amount += amount;
+                    HttpContext.Session.SetObjectAsJson(CartSession, cart);
                     return Json(-1);
                 }
                 else

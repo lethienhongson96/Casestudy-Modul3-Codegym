@@ -28,7 +28,7 @@
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Motobike Shop</a>
+            <a class="navbar-brand" asp-action="Index" asp-controller="CustomerHome">Motobike Shop</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -62,12 +62,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <!-- Cart -->
+                        <a asp-action="WatchCart" asp-controller="CustomerHome" class="nav-link">
                             <i class="fa fa-shopping-cart" aria-hidden="true" style="color:red"></i>
                             <span style="color:red;padding-left:1px;" id="CartNum">
                                 0
                             </span>
                         </a>
+                        <!--end Cart -->
                     </li>
                 </ul>
             </div>
@@ -140,7 +142,10 @@
                 </ul>
                 <p>Tên sản phẩm: <strong>@ProductTop.Name</strong></p>
                 <p>Giá sản phẩm: <strong>@ProductTop.PricePerUnit.ToString("N0")</strong></p>
-                <button>Thêm Vào Giỏ Hàng</button> Số Lượng<input type="number"  value="1"/>
+                <a href="javascript:void(0)" onclick="CustomerCart.AddItem(@ProductTop.Id)" class="btn btn-style btn-primary">
+                    Thêm Vào Giỏ Hàng
+                </a>
+                <small>Số lượng </small><input type="number" class="btn btn-style border-btn text-info" id="@ProductTop.Id" style="width:100px" value="1" />
             </div>
             <div class="col-lg-6">
                 <img class="img-fluid rounded" alt=""
@@ -165,7 +170,10 @@
     <!-- Bootstrap core JavaScript -->
     <script src="~/BusinessLayout/vendor/jquery/jquery.min.js"></script>
     <script src="~/BusinessLayout/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="~/lib/bootbox/bootbox.min.js"></script>
+    <!-- JavaScript for Cart -->
+    <script src="~/js/CustomerCart.js"></script>
+    <!-- /.JavaScript for Cart -->
 </body>
 
 </html>
