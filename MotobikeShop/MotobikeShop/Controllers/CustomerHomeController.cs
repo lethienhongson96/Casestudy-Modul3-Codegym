@@ -19,5 +19,11 @@ namespace MotobikeShop.Controllers
         {
             return View(categoryRepository.Categories);
         }
+
+        [HttpGet]
+        public IActionResult WatchProducts(int id)
+        {
+            return View(categoryRepository.GetProductsByCategoryId(id));
+        }
     }
 }

@@ -4,13 +4,15 @@
 {
     <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-            <a href="#">
+            <a asp-action="WatchProducts" asp-controller="CustomerHome" asp-route-id="@item.Id">
                 <img class="card-img-top" src="~/Images/Logos/@item.Logo" alt="" style="height:200px">
             </a>
             <div class="card-body">
                 <p class="card-text">@item.Description</p>
                 <h4 class="card-title" style="text-align:center">
-                    <a asp-action="WatchProducts" asp-controller="CustomerHome">@item.Name</a>
+                    <a asp-action="WatchProducts" asp-controller="CustomerHome" asp-route-id="@item.Id">
+                        @item.Name
+                    </a>
                 </h4>
             </div>
         </div>
