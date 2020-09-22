@@ -22,6 +22,7 @@ namespace MotobikeShop.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private const string AvatarUserDefault = "DefaultAvatar.png";
+
         public AccountController(AppDbContext context, IWebHostEnvironment hostEnvironment,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
@@ -122,7 +123,7 @@ namespace MotobikeShop.Controllers
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
                     else
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "CustomerHome");
                 }
             }
             ModelState.AddModelError("", "Sai Tài Khoản Hoặc Mật Khẩu !");
@@ -219,7 +220,7 @@ namespace MotobikeShop.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "CustomerHome");
         }
 
         public IActionResult UserDetail(string id) =>

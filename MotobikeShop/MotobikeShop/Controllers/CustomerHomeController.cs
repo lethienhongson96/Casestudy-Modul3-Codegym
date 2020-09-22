@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MotobikeShop.Models;
 using MotobikeShop.Models.CartSession;
@@ -9,6 +10,7 @@ using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
 {
+    [AllowAnonymous]
     public class CustomerHomeController : Controller
     {
         private const string CartSession = "CartSession";
