@@ -21,10 +21,11 @@
                     <div class="card h-100">
                         <img class="card-img-top" src="~/Images/ProductImages/@item.ImagePath" alt="">
                         <div class="card-body">
+                            <p class="text-info" style="text-align:center">@item.Name</p>
+                                <div style="text-align: center">
                             <p class="text-info" style="text-align:center">Giá Sản Phẩm: @item.PricePerUnit.ToString("N0")</p>
-                            <div style="text-align: center">
-                                <small>Số Lượng</small><input type="number" class="btn btn-style border-btn text-info" id="@item.Id" style="width:100px" value="1" />
-                            </div>
+                            <small>Số Lượng</small><input type="number" class="btn btn-style border-btn text-info" id="@item.Id" style="width:100px" value="1" />
+                        </div>
                             <h4 class="card-title" style="text-align:center">
                                 <a href="javascript:void(0)" onclick="CustomerCart.AddItem(@item.Id)" class="btn btn-style btn-primary">
                                     Thêm Vào Giỏ Hàng

@@ -6,7 +6,9 @@
 
     double totalOrder = 0;
 }
-
+<div>
+    <a href="#" style="margin-left:1050px">Đặt Hàng</a>
+</div>
 <table class="table" id="ProductIndex">
     <thead class="thead-dark" style="text-align:center">
         <tr>
@@ -24,8 +26,8 @@
                 <td>@products.Find(el => el.Id == item.ProductId).Name</td>
                 <td>@item.Amount</td>
                 <td>
-                <img src="~/Images/ProductImages/@products.Find(el => el.Id == item.ProductId).ImagePath" 
-                     style="height:70px;width:70px"/>
+                    <img src="~/Images/ProductImages/@products.Find(el => el.Id == item.ProductId).ImagePath"
+                         style="height:70px;width:70px" />
                 </td>
                 <td>@total.ToString("N0")</td>
                 @{totalOrder += total; }

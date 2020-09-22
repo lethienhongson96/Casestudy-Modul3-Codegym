@@ -40,7 +40,10 @@ namespace MotobikeShop.Controllers
         public IActionResult WatchCart()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
-            HttpContext.Session.SetObjectAsJson(CartSession, cart);
+            if (cart != null)
+                HttpContext.Session.SetObjectAsJson(CartSession, cart);
+            else
+                HttpContext.Session.SetObjectAsJson(CartSession, new List<CartItem>());
 
             return View(cart);
         }

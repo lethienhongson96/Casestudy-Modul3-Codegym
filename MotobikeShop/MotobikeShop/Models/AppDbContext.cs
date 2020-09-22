@@ -26,6 +26,7 @@ namespace MotobikeShop.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<InfoCustomer> InfoCustomers { get; set; }
 
         //Info for Account
         public DbSet<District> District { get; set; }
@@ -47,6 +48,7 @@ namespace MotobikeShop.Models
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
+            modelBuilder.ApplyConfiguration(new InfoCustomerConfiguration());
 
             //seeding data
             modelBuilder.Seed();
