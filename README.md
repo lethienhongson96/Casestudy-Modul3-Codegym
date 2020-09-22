@@ -12,4 +12,4 @@ Chức năng:
 
 	   + Quản lí các hóa đơn, tính toán tiền cho mỗi hóa đơn
 	   
-        + Sử dụng giỏ hàng để mua hàng
+       + Sử dụng giỏ hàng để mua hàng
