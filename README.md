@@ -5,6 +5,7 @@ Dev: Lê Thiên Hồng Sơn
 Công nghệ: .NET CORE 3.1
 
 Chức năng:
+	   
 	   + Đăng nhập, đăng ký  quản lí user người dùng và phân quyền
 
 	   + Quản lí các Danh mục sản phẩm, Sản phẩm
