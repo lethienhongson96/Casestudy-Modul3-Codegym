@@ -22,6 +22,11 @@ namespace MotobikeShop.Configurations
                .WithMany(b => b.Orders)
                .HasForeignKey(p => p.CreateBy)
                .IsRequired(false);
+
+            builder.HasOne(e => e.InfoCustomer)
+                   .WithMany(c => c.Orders)
+                   .HasForeignKey(e=>e.InfoCustomerId)
+                   .IsRequired(false);
         }
     }
 }
