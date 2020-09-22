@@ -1,14 +1,28 @@
 ﻿@model List<CartItem>
 
 @inject AppDbContext context;
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager;
 @{
     List<Product> products = context.Products.ToList();
-
+    var CurrentAccount = _signInManager.UserManager.GetUserAsync(User).Result;
     double totalOrder = 0;
 }
-<div>
-    <a href="#" style="margin-left:1050px">Đặt Hàng</a>
-</div>
+@if (_signInManager.IsSignedIn(User))
+{
+    <div>
+        <a href="javascript:void(0)" onclick="CustomerCart.OrderByAccount('@CurrentAccount.Id')" style="margin-left:1050px">
+            Đặt Hàng
+        </a>
+    </div>
+}
+@*else
+{
+    <div>
+        <a style="margin-left:1050px" href="javascript:void(0)" onclick="CustomerCart.OrderByInfo(@CurrentAccount.Id)">
+            Đặt Hàng
+        </a>
+    </div>
+}*@
 <table class="table" id="ProductIndex">
     <thead class="thead-dark" style="text-align:center">
         <tr>
@@ -41,3 +55,7 @@
         </tr>
     </tbody>
 </table>
+
+@section Scripts{
+    <script src="~/js/CustomerCart.js" asp-append-version="true"></script>
+}

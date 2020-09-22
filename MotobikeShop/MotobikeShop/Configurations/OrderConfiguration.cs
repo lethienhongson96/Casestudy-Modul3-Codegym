@@ -15,18 +15,16 @@ namespace MotobikeShop.Configurations
         {
             builder.HasKey(el => el.Id);
 
-            builder.Property(el => el.CreateAt).IsRequired();
+            builder.Property(el => el.CreateAt).IsRequired().HasDefaultValue(DateTime.Today);
             builder.Property(el => el.PayStatus).IsRequired().HasDefaultValue(PayStatus.unpaid);
+            builder.Property(el => el.ShipperDate).IsRequired().HasDefaultValue(DateTime.Today);
 
             builder.HasOne(p => p.ApplicationUser)
                .WithMany(b => b.Orders)
                .HasForeignKey(p => p.CreateBy)
                .IsRequired(false);
 
-            builder.HasOne(e => e.InfoCustomer)
-                   .WithMany(c => c.Orders)
-                   .HasForeignKey(e=>e.InfoCustomerId)
-                   .IsRequired(false);
+            builder.Property(el => el.InfoCustomerId).HasDefaultValue(0);
         }
     }
 }

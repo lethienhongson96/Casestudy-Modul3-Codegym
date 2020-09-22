@@ -18,6 +18,25 @@ CustomerCart.AddItem = function (id) {
             }
         }
     });
+}
 
+
+CustomerCart.OrderByAccount = function (id) {
+    $.ajax({
+        url: `/Cart/OrderByAccount/${id}`,
+        method: "GET",
+        contentType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (data > 0) {
+                bootbox.alert({
+                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xin Cảm Ơn !</p>",
+                    callback: function () {
+                        window.location.href = "/CustomerHome/Index/";
+                    }
+                });
+            }
+        }
+    });
 }
 

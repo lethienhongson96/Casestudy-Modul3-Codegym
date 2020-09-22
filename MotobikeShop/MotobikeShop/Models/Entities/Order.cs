@@ -19,7 +19,6 @@ namespace MotobikeShop.Models.Entities
         public ApplicationUser ApplicationUser { get; set; }
 
         public int InfoCustomerId { get; set; }
-        public InfoCustomer InfoCustomer{ get; set; }
 
     }
 }

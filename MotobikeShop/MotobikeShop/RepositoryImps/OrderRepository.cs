@@ -16,7 +16,7 @@ namespace MotobikeShop.RepositoryImps
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IOrderDetailRepository detailRepository;
 
-        public OrderRepository(AppDbContext context,UserManager<ApplicationUser> userManager,
+        public OrderRepository(AppDbContext context, UserManager<ApplicationUser> userManager,
             IOrderDetailRepository detailRepository)
         {
             this.context = context;
@@ -29,24 +29,18 @@ namespace MotobikeShop.RepositoryImps
             return (context.SaveChanges());
         }
 
-        public int CreateOrderDetailInOrder(int id, int amount, string UserId)
+        public int AddOrderDetailInOrder(Order order, int productId, int amount)
         {
-            Order order = new Order()
-            {
-                CreateAt = DateTime.Today,
-                CreateBy = UserId,
-                ShipperDate = DateTime.Today
-            };
-            Product product = context.Products.FirstOrDefault(el=>el.Id==id);
+            Product product = context.Products.FirstOrDefault(el => el.Id == productId);
 
-            if (CreateOrder(order) > 0)
+            if (context.Orders.ToList().Contains(order) && product != null)
             {
                 OrderDetail orderDetail = new OrderDetail()
                 {
                     OrderId = order.Id,
-                    ProductId = id,
+                    ProductId = product.Id,
                     Quantity = amount,
-                    UnitPrice= product.PricePerUnit*amount
+                    UnitPrice = product.PricePerUnit * amount
                 };
                 context.Add(orderDetail);
 
@@ -112,5 +106,8 @@ namespace MotobikeShop.RepositoryImps
             context.Update(order);
             return context.SaveChanges();
         }
+
+        public List<OrderDetail> GetOrderDetailsByOrderId(int id) =>
+            context.OrderDetails.ToList().FindAll(el => el.OrderId == id);
     }
 }

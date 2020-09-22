@@ -25,6 +25,8 @@ namespace MotobikeShop.Repositories
 
         int PayOrder(int id);
 
-        int CreateOrderDetailInOrder(int id, int amount, string UserId);
+        int AddOrderDetailInOrder(Order order,int productId, int amount);
+
+        List<OrderDetail> GetOrderDetailsByOrderId(int id);
     }
 }

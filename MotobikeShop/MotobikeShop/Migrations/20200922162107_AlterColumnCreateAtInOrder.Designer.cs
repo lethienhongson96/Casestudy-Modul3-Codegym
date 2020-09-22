@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200922162107_AlterColumnCreateAtInOrder")]
+    partial class AlterColumnCreateAtInOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91",
-                            ConcurrencyStamp = "8b29ba13-8cc1-488c-a5cd-96ae4b5bd843",
+                            ConcurrencyStamp = "bb19d036-ffb5-401c-a18b-4851aa76c06c",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -251,14 +253,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "349a2bfa-5bed-4ade-b536-a75e255c920f",
+                            ConcurrencyStamp = "df8b4f58-62da-4417-a2f8-4968fc67e018",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGYZcYtWq8sFDewBAJpSo38ML37s42AQZNtlvakTSCrCO73v/x+nAh4INgpx2Dtyeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED7jIWFljZxbjGmEkFRQuLw5jvpoyukM2I/LvH2zjs91f8TU3BA0lWPBhQM0PHLGpQ==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -271,14 +273,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "eccbbd10-c16d-4380-b5b1-188b2bc8c57e",
+                            ConcurrencyStamp = "aa791423-5f3c-4ecd-99e9-3a12e670a524",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECfRBcdljJjkUj5ed+P0QIVSGexmpZ1o+QrSqQviUD4M4uu4aUnOq98T8k70UNdMbA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFcVvCsNqKsnUi6cA8qWEB1OToYFWtW9ZabuX2CbugA0YYpTpT+nto0GF4rpaNZGaQ==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -518,9 +520,7 @@ namespace MotobikeShop.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("InfoCustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.Property<int>("PayStatus")
                         .ValueGeneratedOnAdd()
@@ -535,6 +535,8 @@ namespace MotobikeShop.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreateBy");
+
+                    b.HasIndex("InfoCustomerId");
 
                     b.ToTable("Orders");
 
@@ -895,6 +897,10 @@ namespace MotobikeShop.Migrations
                     b.HasOne("MotobikeShop.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Orders")
                         .HasForeignKey("CreateBy");
+
+                    b.HasOne("MotobikeShop.Models.Entities.InfoCustomer", "InfoCustomer")
+                        .WithMany("Orders")
+                        .HasForeignKey("InfoCustomerId");
                 });
 
             modelBuilder.Entity("MotobikeShop.Models.Entities.OrderDetail", b =>

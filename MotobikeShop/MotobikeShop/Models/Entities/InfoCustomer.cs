@@ -13,6 +13,5 @@ namespace MotobikeShop.Models.Entities
         public string Email { get; set; }
         public int AddressId { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
     }
 }
