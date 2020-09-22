@@ -3,9 +3,9 @@
 
 @{
     var ListProduct = context.Products.ToList().FindAll(el => el.Status == Status.Active);
+    Layout = "_LayoutAdminPage";
 }
 
-@*nav*@
 <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb my-breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -13,7 +13,6 @@
         <li class="breadcrumb-item active" aria-current="page">Carousels</li>
     </ol>
 </nav>
-@*nav*@
 
 <div class="row">
     @foreach (var item in Model)
