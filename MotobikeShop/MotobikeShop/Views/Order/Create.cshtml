@@ -3,6 +3,7 @@
 @inject UserManager<ApplicationUser> usermanager;
 @{
     var users = usermanager.Users.ToList();
+    Layout = "_LayoutAdminPage";
 }
 
 <form asp-controller="Order" asp-action="Create" method="post">

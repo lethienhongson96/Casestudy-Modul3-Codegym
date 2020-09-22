@@ -24,7 +24,6 @@ namespace MotobikeShop.Controllers
             _logger = logger;
             this.homeRepository = homeRepository;
         }
-        [AllowAnonymous]
         public IActionResult Index()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("CartSession");

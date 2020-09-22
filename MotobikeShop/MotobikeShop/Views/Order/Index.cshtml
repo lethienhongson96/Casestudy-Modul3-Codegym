@@ -4,6 +4,7 @@
 @inject UserManager<ApplicationUser> userManager;
 @{
     List<OrderDetail> orderDetails = context.OrderDetails.ToList();
+    Layout = "_LayoutAdminPage";
 }
 
 <table id="OrderIndex" class="table table-striped table-bordered" style="width:100%">
@@ -30,8 +31,8 @@
                     </a>
                 </td>
                 <td>@item.PayStatus</td>
-                <td>@item.CreateAt</td>
-                <td>@item.ShipperDate</td>
+                <td>@item.CreateAt.ToShortDateString()</td>
+                <td>@item.ShipperDate.ToShortDateString()</td>
                 <td>
                     <a asp-controller="OrderDetail" asp-action="WatchOrderDetail" asp-route-id="@item.Id">
                         @orderDetails.FindAll(el => el.OrderId == item.Id).Count Sản Phẩm

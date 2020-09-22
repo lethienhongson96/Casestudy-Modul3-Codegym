@@ -131,9 +131,11 @@ namespace MotobikeShop.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public JsonResult GetDistrictById(int id) =>
             Json(new SelectList(_context.District.Where(x => x.ProvinceId == id).ToList(), "Id", "Name"));
 
+        [AllowAnonymous]
         public JsonResult GetWardById(int id) =>
              Json(new SelectList(_context.Ward.Where(x => x.DistrictId == id).ToList(), "Id", "Name"));
 

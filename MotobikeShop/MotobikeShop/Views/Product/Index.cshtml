@@ -3,7 +3,7 @@
 @inject AppDbContext context;
 @inject UserManager<ApplicationUser> userManager;
 @{
-
+    Layout = "_LayoutAdminPage";
 }
 <a asp-action="Create" asp-controller="Product" style="float:right">Create</a>
 
@@ -26,7 +26,7 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.PricePerUnit.ToString("N0")</td>
-                <td>@item.CreateAt</td>
+                <td>@item.CreateAt.ToShortDateString()</td>
                 <td>
                     <a asp-controller="Account" asp-action="UserDetail"
                        asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">

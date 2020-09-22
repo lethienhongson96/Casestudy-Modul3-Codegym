@@ -2,6 +2,7 @@
 @inject SignInManager<ApplicationUser> signInManager;
 @{
     var CurrentAccount = signInManager.UserManager.GetUserAsync(User).Result;
+    Layout = "_LayoutAdminPage";
 }
 
 <form asp-controller="Category" asp-action="Create" method="post">

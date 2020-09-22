@@ -80,12 +80,5 @@ namespace MotobikeShop.Controllers
             var result = orderRepository.PayOrder(id);
             return Json(new { result });
         }
-
-        [AllowAnonymous]
-        [Route("/Order/Buy/{id}/{amount}/{UserId}")]
-        public IActionResult Buy(int id,int amount,string UserId)
-        {
-            return Json(orderRepository.CreateOrderDetailInOrder(id,amount,UserId));
-        }
     }
 }

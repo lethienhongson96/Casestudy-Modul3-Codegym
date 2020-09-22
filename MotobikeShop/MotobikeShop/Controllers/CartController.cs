@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotobikeShop.Models;
 using MotobikeShop.Models.CartSession;
@@ -7,6 +8,7 @@ using System.Linq;
 
 namespace MotobikeShop.Controllers
 {
+    [AllowAnonymous]
     public class CartController : Controller
     {
         private const string CartSession = "CartSession";

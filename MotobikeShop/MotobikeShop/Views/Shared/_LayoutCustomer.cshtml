@@ -1,5 +1,4 @@
-﻿
-@inject AppDbContext context;
+﻿@inject AppDbContext context;
 @inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager;
 @inject IHttpContextAccessor HttpContextAccessor
 
@@ -89,7 +88,7 @@
                         <a asp-action="WatchCart" asp-controller="CustomerHome" class="nav-link">
                             <i class="fa fa-shopping-cart" aria-hidden="true" style="color:red"></i>
                             <span style="color:red;padding-left:1px;" id="CartNum">
-                                0
+                                @cart.Count
                             </span>
                         </a>
                         <!--end Cart -->

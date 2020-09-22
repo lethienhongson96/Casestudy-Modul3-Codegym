@@ -4,6 +4,7 @@
 @inject UserManager<ApplicationUser> userManager;
 @{
     var ProductList = context.Products.ToList();
+    Layout = "_LayoutAdminPage";
 }
 <a asp-action="Create" asp-controller="Category">Create</a>
 
@@ -25,7 +26,7 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Status</td>
-                <td>@item.CreateAt</td>
+                <td>@item.CreateAt.ToShortDateString()</td>
                 <td>
                     <a asp-controller="Account" asp-action="UserDetail"
                        asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">

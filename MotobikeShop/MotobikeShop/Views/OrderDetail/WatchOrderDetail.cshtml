@@ -5,6 +5,7 @@
     List<OrderDetail> orderDetails = context.OrderDetails.ToList().FindAll(el => el.OrderId == Model.Id);
 
     List<Product> products = context.Products.ToList();
+    Layout = "_LayoutAdminPage";
 }
 <a asp-controller="OrderDetail" asp-action="Create" asp-route-id="@Model.Id" style="float:right">
     Thêm Sản Phẩm Cho Hóa Đơn
