@@ -1,0 +1,22 @@
+﻿@model InfoCustomer
+
+@{
+    Layout = "_LayoutAdminPage";
+}
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        Email: <span style="color:green">@Model.Email</span>
+</li>
+    <li class="list-group-item">
+        Họ Và Tên: <span style="color:green">@Model.Name</span>
+</li>
+    <li class="list-group-item">
+        Số Điện Thoại:
+        <span style="color:green">@Model.PhoneNum</span>
+</li>
+    <li class="list-group-item">
+        Địa Chỉ:
+        <span style="color:green">@Model.Address</span> 
+    </li>
+</ul>

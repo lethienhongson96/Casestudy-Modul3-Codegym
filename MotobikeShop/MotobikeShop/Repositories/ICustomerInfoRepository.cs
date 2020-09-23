@@ -9,5 +9,7 @@ namespace MotobikeShop.Repositories
     public interface ICustomerInfoRepository
     {
         int CreateInfoCustomer(InfoCustomer infoCustomer);
+
+        InfoCustomer GetInfoCustomerById(int id);
     }
 }

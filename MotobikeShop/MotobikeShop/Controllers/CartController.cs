@@ -103,7 +103,7 @@ namespace MotobikeShop.Controllers
         {
             int result = 0;
 
-            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(address))
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(address)&&phoneNum.ToString().Length>8)
             {
                 InfoCustomer infoCustomer = new InfoCustomer()
                 {

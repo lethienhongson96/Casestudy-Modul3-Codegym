@@ -2,43 +2,54 @@
 
 @inject AppDbContext context;
 @{
+    Layout = "_LayoutAdminPage";
 }
 
 <ul class="list-group list-group-flush">
     <li class="list-group-item">
-        Email: @Model.Email
+        Email: <span style="color:green">@Model.Email</span>
     </li>
     <li class="list-group-item">
-        Họ Và Tên: @Model.FullName
+        Họ Và Tên: <span style="color:green">@Model.FullName</span>
     </li>
     <li class="list-group-item">
         Tỉnh/Thành:
-        @context.Province.FirstOrDefault(el =>
-        el.Id == context.Addresses.FirstOrDefault(el =>
-        el.Id == Model.AddressId).ProvinceId).Name
+        <span style="color:green">
+            @context.Province.FirstOrDefault(el =>
+                el.Id == context.Addresses.FirstOrDefault(el =>
+                el.Id == Model.AddressId).ProvinceId).Name
+        </span>
     </li>
     <li class="list-group-item">
         Quận/Huyện:
-        @context.District.FirstOrDefault(el =>
-            el.Id == context.Addresses.FirstOrDefault(el =>
-            el.Id == Model.AddressId).DistrictId).Name
+        <span style="color:green">
+            @context.District.FirstOrDefault(el =>
+                el.Id == context.Addresses.FirstOrDefault(el =>
+                el.Id == Model.AddressId).DistrictId).Name
+        </span>
     </li>
     <li class="list-group-item">
         Xã/Phường:
-        @context.Ward.FirstOrDefault(el =>
-            el.Id == context.Addresses.FirstOrDefault(el =>
-            el.Id == Model.AddressId).WardId).Name
+        <span style="color:green">
+            @context.Ward.FirstOrDefault(el =>
+                el.Id == context.Addresses.FirstOrDefault(el =>
+                el.Id == Model.AddressId).WardId).Name
+        </span>
     </li>
     <li class="list-group-item">
         Địa Chỉ:
-        @context.Addresses.FirstOrDefault(el =>
-        el.Id == Model.AddressId).HouseNum
+        <span style="color:green">
+            @context.Addresses.FirstOrDefault(el =>
+            el.Id == Model.AddressId).HouseNum
+        </span>
     </li>
     <li class="list-group-item">
         Số Điện Thoại:
-        @Model.PhoneNumber
+        <span style="color:green">
+            @Model.PhoneNumber
+        </span>
     </li>
     <li class="list-group-item">
-        Avatar: <img src="~/Images/UserImages/@Model.Avatar" alt="Alternate Text" style="margin-left:400px"/>
+        Avatar: <img src="~/Images/UserImages/@Model.Avatar" alt="Alternate Text" style="margin-left:400px" />
     </li>
 </ul>

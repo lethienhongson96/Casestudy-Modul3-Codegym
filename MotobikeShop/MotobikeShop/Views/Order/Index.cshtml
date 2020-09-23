@@ -34,7 +34,11 @@
                     }
                     else
                     {
-                            @context.InfoCustomers.FirstOrDefault(el=>el.Id==item.InfoCustomerId).Name
+                        <a asp-controller="CustomerInfo" asp-action="CustomerDetail"
+                           asp-route-id="@context.InfoCustomers.FirstOrDefault(el => el.Id == item.InfoCustomerId).Id">
+
+                            @context.InfoCustomers.FirstOrDefault(el => el.Id == item.InfoCustomerId).Name
+                        </a>
                     }
                 </td>
                 <td>@item.PayStatus</td>

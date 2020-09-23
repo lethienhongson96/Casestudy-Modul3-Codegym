@@ -21,5 +21,10 @@ namespace MotobikeShop.RepositoryImps
             context.Add(infoCustomer);
             return context.SaveChanges();
         }
+
+        public InfoCustomer GetInfoCustomerById(int id)
+        {
+            return context.InfoCustomers.FirstOrDefault(el=>el.Id==id);
+        }
     }
 }

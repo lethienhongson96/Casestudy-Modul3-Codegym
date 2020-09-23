@@ -32,7 +32,7 @@ CustomerCart.OrderByAccount = function (id) {
             console.log(data);
             if (data > 0) {
                 bootbox.alert({
-                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới. Xin Cảm Ơn !</p>",
+                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới</p><p style='color: green'>Xin Cảm Ơn !</p>",
                     callback: function () {
                         window.location.href = "/CustomerHome/Index/";
                     }
@@ -74,6 +74,10 @@ CustomerCart.OrderWithoutAccount = function () {
         $("#Email").val("");
     }
 
+    if (phoneNum.toString().length < 9) {
+        $("#validatePhoneNum").html("Số điện thoại có ít nhất 9 chữ số!");
+    }
+
     $.ajax({
         url: `/Cart/OrderWithoutAccount/${name}/${phoneNum}/${email}/${address}`,
         method: "GET",
@@ -82,7 +86,7 @@ CustomerCart.OrderWithoutAccount = function () {
             console.log(data);
             if (data > 0) {
                 bootbox.alert({
-                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới. Xin Cảm Ơn !</p>",
+                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới</p><p style='color: green'>Xin Cảm Ơn !</p>",
                     callback: function () {
                         window.location.href = "/CustomerHome/Index/";
                     }
