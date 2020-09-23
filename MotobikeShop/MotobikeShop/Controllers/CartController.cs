@@ -119,7 +119,7 @@ namespace MotobikeShop.Controllers
                     var order = new Order()
                     {
                         CreateAt = DateTime.Today,
-                        ShipperDate = DateTime.Today,
+                        ShipperDate = DateTime.Today.AddDays(3),
                         InfoCustomerId = infoCustomer.Id
                     };
                     orderRepository.CreateOrder(order);

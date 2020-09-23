@@ -32,7 +32,7 @@ CustomerCart.OrderByAccount = function (id) {
             console.log(data);
             if (data > 0) {
                 bootbox.alert({
-                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xin Cảm Ơn !</p>",
+                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới. Xin Cảm Ơn !</p>",
                     callback: function () {
                         window.location.href = "/CustomerHome/Index/";
                     }
@@ -82,7 +82,7 @@ CustomerCart.OrderWithoutAccount = function () {
             console.log(data);
             if (data > 0) {
                 bootbox.alert({
-                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xin Cảm Ơn !</p>",
+                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới. Xin Cảm Ơn !</p>",
                     callback: function () {
                         window.location.href = "/CustomerHome/Index/";
                     }

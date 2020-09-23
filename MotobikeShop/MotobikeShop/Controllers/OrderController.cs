@@ -23,21 +23,6 @@ namespace MotobikeShop.Controllers
             return View(orderRepository.GetOrderList());
         }
 
-        [HttpGet]
-        public IActionResult Create() => View();
-
-        [HttpPost]
-        public IActionResult Create(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                if (orderRepository.CreateOrder(order) > 0)
-                    return RedirectToAction("Index", "Order");
-
-                ModelState.AddModelError("", TextErrorToView.WrongMess);
-            }
-            return View(order);
-        }
 
         [Route("/Order/Delete/{id}")]
         public IActionResult Delete(int id)
