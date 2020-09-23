@@ -24,11 +24,18 @@
         {
             <tr style="text-align:center">
                 <td>
-                    <a asp-controller="Account" asp-action="UserDetail"
-                       asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">
+                    @if (item.CreateBy != null)
+                    {
+                        <a asp-controller="Account" asp-action="UserDetail"
+                           asp-route-id="@userManager.FindByIdAsync(item.CreateBy).Result.Id">
 
-                        @userManager.FindByIdAsync(item.CreateBy).Result.FullName
-                    </a>
+                            @userManager.FindByIdAsync(item.CreateBy).Result.FullName
+                        </a>
+                    }
+                    else
+                    {
+                            @context.InfoCustomers.FirstOrDefault(el=>el.Id==item.InfoCustomerId).Name
+                    }
                 </td>
                 <td>@item.PayStatus</td>
                 <td>@item.CreateAt.ToShortDateString()</td>

@@ -8,13 +8,13 @@
     double totalOrder = 0;
 }
 
-
 @if (Model.Count != 0)
 {
     @if (_signInManager.IsSignedIn(User))
     {
         <div>
-            <a href="javascript:void(0)" onclick="CustomerCart.OrderByAccount('@CurrentAccount.Id')" style="margin-left:1000px">
+            <a class="btn btn-primary" href="javascript:void(0)" onclick="CustomerCart.OrderByAccount('@CurrentAccount.Id')"
+               style="margin-left:970px;margin-bottom:30px">
                 Xác Nhận Đặt Hàng
             </a>
         </div>
@@ -36,28 +36,32 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="FormGetInfo">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tên Khách Hàng:</label>
-                                <input type="text" class="form-control" id="Name">
+                                <input type="text" class="form-control" id="Name" required>
+                                <span id="validateName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Số Điện Thoại:</label>
-                                <input type="number" class="form-control" id="PhoneNum">
+                                <input type="number" class="form-control" id="PhoneNum" required>
+                                <span id="validatePhoneNum" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Email:</label>
-                                <input type="email" class="form-control" id="Email">
+                                <input type="email" class="form-control" id="Email" required>
+                                <span id="validateEmail" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Địa Chỉ Nhận Hàng:</label>
-                                <input type="text" class="form-control" id="Address">
+                                <input type="text" class="form-control" id="Address" required>
+                                <span id="validateAddress" class="text-danger"></span>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="Submit">Send message</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" onclick="CustomerCart.OrderWithoutAccount()">Đặt Đơn Hàng</button>
                     </div>
                 </div>
             </div>

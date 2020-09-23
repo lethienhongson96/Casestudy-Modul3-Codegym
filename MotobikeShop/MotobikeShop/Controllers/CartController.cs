@@ -102,32 +102,36 @@ namespace MotobikeShop.Controllers
         public IActionResult OrderWithoutAccount(string name, int phoneNum, string email, string address)
         {
             int result = 0;
-            InfoCustomer infoCustomer = new InfoCustomer()
-            {
-                Name = name,
-                PhoneNum = phoneNum.ToString(),
-                Email = email,
-                Address = address
-            };
-            int createInfoResult = infoRepository.CreateInfoCustomer(infoCustomer);
 
-            if (createInfoResult > 0)
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(address))
             {
-                var order = new Order()
+                InfoCustomer infoCustomer = new InfoCustomer()
                 {
-                    CreateAt = DateTime.Today,
-                    ShipperDate = DateTime.Today,
-                    InfoCustomerId= infoCustomer.Id
+                    Name = name,
+                    PhoneNum = phoneNum.ToString(),
+                    Email = email,
+                    Address = address
                 };
-                orderRepository.CreateOrder(order);
+                int createInfoResult = infoRepository.CreateInfoCustomer(infoCustomer);
 
-                var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
-                foreach (var item in cart)
-                    orderRepository.AddOrderDetailInOrder(order, item.ProductId, item.Amount);
+                if (createInfoResult > 0)
+                {
+                    var order = new Order()
+                    {
+                        CreateAt = DateTime.Today,
+                        ShipperDate = DateTime.Today,
+                        InfoCustomerId = infoCustomer.Id
+                    };
+                    orderRepository.CreateOrder(order);
 
-                result = orderRepository.GetOrderDetailsByOrderId(order.Id).Count;
-                if (result > 0)
-                    HttpContext.Session.SetObjectAsJson(CartSession, new List<CartItem>());
+                    var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
+                    foreach (var item in cart)
+                        orderRepository.AddOrderDetailInOrder(order, item.ProductId, item.Amount);
+
+                    result = orderRepository.GetOrderDetailsByOrderId(order.Id).Count;
+                    if (result > 0)
+                        HttpContext.Session.SetObjectAsJson(CartSession, new List<CartItem>());
+                }
             }
             return Json(result);
         }

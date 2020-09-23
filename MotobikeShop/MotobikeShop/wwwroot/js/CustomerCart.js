@@ -42,6 +42,56 @@ CustomerCart.OrderByAccount = function (id) {
     });
 }
 
+CustomerCart.OrderWithoutAccount = function () {
+
+    var name = $("#Name").val();
+    var phoneNum = $("#PhoneNum").val();
+    var email = $("#Email").val();
+    var address = $("#Address").val();
+
+    if (name == "") {
+        $("#validateName").html("bạn chưa nhập tên");
+    }
+    if (phoneNum == "") {
+        $("#validatePhoneNum").html("bạn chưa nhập số điện thoại");
+    }
+    if (email == "") {
+        $("#validateEmail").html("bạn chưa nhập Email");
+    }
+    if (address == "") {
+        $("#validateAddress").html("bạn chưa nhập địa chỉ");
+    }
+
+    var j = 0;
+    for (var i = 0; i < email.length; i++) {
+        if (email[i]=="@") {
+            j = 1;
+            break;
+        }
+    }
+    if (j!=1) {
+        $("#validateEmail").html("Email không đúng định dạng");
+        $("#Email").val("");
+    }
+
+    $.ajax({
+        url: `/Cart/OrderWithoutAccount/${name}/${phoneNum}/${email}/${address}`,
+        method: "GET",
+        contentType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (data > 0) {
+                bootbox.alert({
+                    message: "<p style='color: green'>Đặt Hàng Thành Công, Xin Cảm Ơn !</p>",
+                    callback: function () {
+                        window.location.href = "/CustomerHome/Index/";
+                    }
+                });
+            }
+        }
+    });
+}
+
 CustomerCart.RemoveItem = function (id) {
     $.ajax({
         url: `/Cart/RemoveItem/${id}`,
@@ -55,40 +105,3 @@ CustomerCart.RemoveItem = function (id) {
         }
     });
 }
-
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    $("#Submit").click(function () {
-
-        var name = $("#Name").val();
-        var phoneNum = $("#PhoneNum").val();
-        var email = $("#Email").val();
-        var address = $("#Address").val();
-
-        $.ajax({
-            url: `/Cart/OrderWithoutAccount/${name}/${phoneNum}/${email}/${address}`,
-            method: "GET",
-            contentType: 'json',
-            success: function (data) {
-                console.log(data);
-                if (data > 0) {
-                    bootbox.alert({
-                        message: "<p style='color: green'>Đặt Hàng Thành Công, Xin Cảm Ơn !</p>",
-                        callback: function () {
-                            window.location.href = "/CustomerHome/Index/";
-                        }
-                    });
-                }
-            }
-        });
-    })
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val(recipient)
-})
-
-
-
