@@ -11,7 +11,6 @@ namespace MotobikeShop.Models.Entities
         public string Name { get; set; }
         public string PhoneNum { get; set; }
         public string Email { get; set; }
-        public int AddressId { get; set; }
-
+        public string Address { get; set; }
     }
 }

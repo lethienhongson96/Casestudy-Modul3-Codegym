@@ -7,55 +7,107 @@
     var CurrentAccount = _signInManager.UserManager.GetUserAsync(User).Result;
     double totalOrder = 0;
 }
-@if (_signInManager.IsSignedIn(User))
-{
-    <div>
-        <a href="javascript:void(0)" onclick="CustomerCart.OrderByAccount('@CurrentAccount.Id')" style="margin-left:1050px">
-            Đặt Hàng
-        </a>
-    </div>
-}
-@*else
-{
-    <div>
-        <a style="margin-left:1050px" href="javascript:void(0)" onclick="CustomerCart.OrderByInfo(@CurrentAccount.Id)">
-            Đặt Hàng
-        </a>
-    </div>
-}*@
-<table class="table" id="ProductIndex">
-    <thead class="thead-dark" style="text-align:center">
-        <tr>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Số Lượng</th>
-            <th scope="col">Hình ảnh</th>
-            <th scope="col">Giá</th>
-        </tr>
-    </thead>
-    <tbody style="text-align:center">
-        @foreach (var item in Model)
-        {
-            <tr>
-                @{ double total = item.Amount * products.Find(el => el.Id == item.ProductId).PricePerUnit; }
-                <td>@products.Find(el => el.Id == item.ProductId).Name</td>
-                <td>@item.Amount</td>
-                <td>
-                    <img src="~/Images/ProductImages/@products.Find(el => el.Id == item.ProductId).ImagePath"
-                         style="height:70px;width:70px" />
-                </td>
-                <td>@total.ToString("N0")</td>
-                @{totalOrder += total; }
-            </tr>
-        }
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Tổng Tiền: <span class="text-danger">@totalOrder.ToString("N0")</span></td>
-        </tr>
-    </tbody>
-</table>
 
+
+@if (Model.Count != 0)
+{
+    @if (_signInManager.IsSignedIn(User))
+    {
+        <div>
+            <a href="javascript:void(0)" onclick="CustomerCart.OrderByAccount('@CurrentAccount.Id')" style="margin-left:1000px">
+                Xác Nhận Đặt Hàng
+            </a>
+        </div>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever=""
+                style="margin-left:890px;margin-bottom:30px">
+            Mua hàng không Có Tài Khoản
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông Tin Khách Hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Tên Khách Hàng:</label>
+                                <input type="text" class="form-control" id="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Số Điện Thoại:</label>
+                                <input type="number" class="form-control" id="PhoneNum">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                <input type="email" class="form-control" id="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Địa Chỉ Nhận Hàng:</label>
+                                <input type="text" class="form-control" id="Address">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="Submit">Send message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <table class="table" id="ProductIndex">
+        <thead class="thead-dark" style="text-align:center">
+            <tr>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số Lượng</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Giá</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody style="text-align:center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @{ double total = item.Amount * products.Find(el => el.Id == item.ProductId).PricePerUnit; }
+                    <td>@products.Find(el => el.Id == item.ProductId).Name</td>
+                    <td>@item.Amount</td>
+                    <td>
+                        <img src="~/Images/ProductImages/@products.Find(el => el.Id == item.ProductId).ImagePath"
+                             style="height:70px;width:70px" />
+                    </td>
+                    <td>@total.ToString("N0")</td>
+                    <td><a href="javascript:void(0)" onclick="CustomerCart.RemoveItem(@item.ProductId)">Xóa</a></td>
+                    @{totalOrder += total; }
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tổng Tiền: <span class="text-danger">@totalOrder.ToString("N0")</span></td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="clearfix"></div>
+    <div>
+        <h2 class="table-warning" style="text-align:center;margin-left:220px">Bạn Chưa Có Sản Phẩm Nào Trong Giỏ Hàng</h2>
+    </div>
+    <div style="height:100px"></div>
+    <div class="clearfix"></div>
+}
 @section Scripts{
     <script src="~/js/CustomerCart.js" asp-append-version="true"></script>
 }
