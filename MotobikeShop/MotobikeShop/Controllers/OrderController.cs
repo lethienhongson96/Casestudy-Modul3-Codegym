@@ -59,6 +59,11 @@ namespace MotobikeShop.Controllers
             return Json(new { result });
         }
 
+        public IActionResult ConfirmPayWithoutAccount(int id)
+        {
+            return Json(0);
+        }
+
         [Route("/Order/Pay/{id}")]
         public IActionResult Pay(int id)
         {

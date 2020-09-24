@@ -52,7 +52,16 @@
                 <td>
                     <a href="javascript:void(0)" class="text-danger" onclick="Order.delete(@item.Id)">Delete</a>|
                     <a asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id">Edit</a>|
-                    <a href="javascript:void(0)" class="text-danger" onclick="Order.ConfirmPay(@item.Id)">Pay</a>
+                    @if (item.CreateBy != null)
+                    {
+                        <a href="javascript:void(0)" class="text-danger" onclick="Order.ConfirmPay(@item.Id)">Pay</a>
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0)" class="text-danger" onclick="Order.ConfirmPayWithoutAccount(@item.Id)">
+                            Pay
+                        </a>
+                    }
                 </td>
             </tr>
         }

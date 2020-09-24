@@ -11,8 +11,10 @@ namespace MotobikeShop.Extensions
         public static void Seed(this ModelBuilder modelBuilder)
         {
             const string ADMIN_ID = "CE6654BD-705E-4D25-8C90-71E2654ADAE8";
-            // any guid, but nothing is against to use the same one
-            const string ROLE_ID = "1A90DABB-1EE6-495A-940B-6E2E4EEC6B91";
+            const string CustomerId = "FC876771-8301-4765-B037-859AA899D708";
+
+            const string CustomerRole_ID = "CE6654BD-705E-4D25-8C90-71E2654ADAE8";
+            const string AdminRole_ID = "AFC2B52F-5EFC-4A24-B6CC-AB8ABF81857E";
 
             modelBuilder.Entity<Address>().HasData(new Address
             {
@@ -27,9 +29,15 @@ namespace MotobikeShop.Extensions
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
-                Id = ROLE_ID,
+                Id = AdminRole_ID,
                 Name = "Admin",
                 NormalizedName = "Admin"
+            },
+            new IdentityRole
+            {
+                Id = CustomerRole_ID,
+                Name = "Customer",
+                NormalizedName = "Customer"
             });
 
             var hasher = new PasswordHasher<ApplicationUser>();
@@ -49,11 +57,6 @@ namespace MotobikeShop.Extensions
                 PhoneNumber = "0982102073"
             });
 
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                RoleId = ROLE_ID,
-                UserId = ADMIN_ID
-            });
 
             #region Seedata for Category
             modelBuilder.Entity<Category>().HasData(
@@ -122,7 +125,7 @@ namespace MotobikeShop.Extensions
             );
             #endregion
 
-            var CustomerId = "FC876771-8301-4765-B037-859AA899D708";
+         
 
             modelBuilder.Entity<Address>().HasData(new Address
             {
@@ -150,6 +153,10 @@ namespace MotobikeShop.Extensions
                 PhoneNumber = "0984910724"
             });
 
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+            new IdentityUserRole<string> { RoleId = AdminRole_ID, UserId = ADMIN_ID },
+            new IdentityUserRole<string> { RoleId = CustomerRole_ID, UserId = CustomerId }
+            );
             #region Create Product
             modelBuilder.Entity<Product>().HasData(
                 new Product

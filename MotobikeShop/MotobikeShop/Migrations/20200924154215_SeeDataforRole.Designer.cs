@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotobikeShop.Models;
 
 namespace MotobikeShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200924154215_SeeDataforRole")]
+    partial class SeeDataforRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,14 +51,14 @@ namespace MotobikeShop.Migrations
                         new
                         {
                             Id = "AFC2B52F-5EFC-4A24-B6CC-AB8ABF81857E",
-                            ConcurrencyStamp = "58ddc08d-c2a7-49ba-9a07-bd83e209217b",
+                            ConcurrencyStamp = "0d1e1421-0b68-4a66-a3e6-5c05d9aeb276",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "CE6654BD-705E-4D25-8C90-71E2654ADAE8",
-                            ConcurrencyStamp = "ee30da90-49ea-480f-bfe0-365add6071fa",
+                            ConcurrencyStamp = "bcced26c-5452-44fb-9452-4fdc9b9b2fcf",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         });
@@ -263,14 +265,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 1,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "b9eca118-d374-4f70-ba7c-33b0b1b3ec27",
+                            ConcurrencyStamp = "70a20872-adfd-4648-8c00-dc2cfe8b89e8",
                             Email = "lethienhongson96@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Hồng Sơn",
                             LockoutEnabled = false,
                             NormalizedEmail = "lethienhongson96@gmail.com",
                             NormalizedUserName = "lethienhongson96@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAl/4LOXjRUsV3ujGDKT1OW5UDGIDftczeC8DlH85cqNsL7+s98gyZdrGjpDiw9Tvg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBTzXarmCK0movrR2gDRbtFgnRW2UgZZcyVUgDtoxxIE5z+D4IvXOTrMy5JJX0ADcw==",
                             PhoneNumber = "0982102073",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -283,14 +285,14 @@ namespace MotobikeShop.Migrations
                             AccessFailedCount = 0,
                             AddressId = 2,
                             Avatar = "DefaultAvatar.png",
-                            ConcurrencyStamp = "058de195-b6ee-4e6a-8b7e-c342119e6dd5",
+                            ConcurrencyStamp = "761f6520-7da4-4649-9a16-d6d6ab4d01c4",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyễn Văn Vui",
                             LockoutEnabled = false,
                             NormalizedEmail = "Customer@gmail.com",
                             NormalizedUserName = "Customer@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFBbYqDVhvFgmRq09NH4osFGhvubR6+sdaRCfCu3wQZPeMb53OoZrpZbQlqttgFxPQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFq63p0z0uXwDo7nvjuRFswEcAT7rUdcOZRfv2/deAK5kvIMbsGGfR2CN0wG92f7OQ==",
                             PhoneNumber = "0984910724",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -311,6 +313,9 @@ namespace MotobikeShop.Migrations
 
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HouseNum")
                         .IsRequired()

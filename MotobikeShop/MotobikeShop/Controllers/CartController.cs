@@ -16,16 +16,14 @@ namespace MotobikeShop.Controllers
     [AllowAnonymous]
     public class CartController : Controller
     {
-        public CartController(IOrderRepository orderRepository, IProductRepository productRepository,
+        public CartController(IOrderRepository orderRepository,
             ICustomerInfoRepository infoRepository)
         {
             this.orderRepository = orderRepository;
-            this.productRepository = productRepository;
             this.infoRepository = infoRepository;
         }
         private const string CartSession = "CartSession";
         private readonly IOrderRepository orderRepository;
-        private readonly IProductRepository productRepository;
         private readonly ICustomerInfoRepository infoRepository;
 
         public IActionResult Index()
@@ -75,6 +73,7 @@ namespace MotobikeShop.Controllers
             orderRepository.CreateOrder(order);
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
+
             foreach (var item in cart)
                 orderRepository.AddOrderDetailInOrder(order, item.ProductId, item.Amount);
 
@@ -93,22 +92,26 @@ namespace MotobikeShop.Controllers
 
             CartItem item = cart.Find(el => el.ProductId == id);
             cart.Remove(item);
+
             HttpContext.Session.SetObjectAsJson(CartSession, cart);
 
             return Json(lengthCartBefor - cart.Count);
         }
 
         [Route("/Cart/OrderWithoutAccount/{name}/{phoneNum}/{email}/{address}")]
-        public IActionResult OrderWithoutAccount(string name, int phoneNum, string email, string address)
+        public IActionResult OrderWithoutAccount(string name, string phoneNum, string email, string address)
         {
             int result = 0;
 
-            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(address)&&phoneNum.ToString().Length>8)
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(address) && phoneNum.Length > 8)
             {
+                if(email.Contains("@")==false)
+                    return Json(result);
+
                 InfoCustomer infoCustomer = new InfoCustomer()
                 {
                     Name = name,
-                    PhoneNum = phoneNum.ToString(),
+                    PhoneNum = phoneNum,
                     Email = email,
                     Address = address
                 };

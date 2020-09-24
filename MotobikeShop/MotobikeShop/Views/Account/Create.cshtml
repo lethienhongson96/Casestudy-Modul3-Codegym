@@ -21,22 +21,26 @@
                     <div class="form-group">
                         <label class="text-info">Họ và Tên</label>
                         <input type="text" class="form-control " placeholder="Họ Và Tên" asp-for="FullName">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label class="text-info">Địa chỉ Email</label>
                         <input type="email" name="email" id="email" class="form-control " placeholder="Địa Chỉ Email" tabindex="4" asp-for="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="text-info">Mật Khẩu</label>
                                 <input type="password" class="form-control " placeholder="Mật Khẩu" asp-for="Password">
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="text-info">Nhập lại mật khẩu</label>
                                 <input type="password" class="form-control " placeholder="Xác Nhận Mật Khẩu" tabindex="6" asp-for="ConfirmPassword">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -60,10 +64,12 @@
                     <div class="form-group">
                         <label class="text-info">Số nhà</label>
                         <input type="text" class="form-control " placeholder="Số Nhà" asp-for="HouseNumber">
+                        <span asp-validation-for="HouseNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label class="text-info">Số điện thoại</label>
                         <input type="number" class="form-control" placeholder="Số Điện Thoại" asp-for="PhoneNum">
+                        <span asp-validation-for="PhoneNum" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label class="text-info">Avatar</label>

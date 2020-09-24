@@ -1,4 +1,7 @@
 ﻿@model EditRoleView
+@{ 
+    Layout = "_LayoutAdminPage";
+}
 
 <form method="post" asp-controller="Role" asp-action="Edit">
     <input hidden asp-for="Role_Id" />

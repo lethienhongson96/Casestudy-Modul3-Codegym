@@ -53,9 +53,6 @@ namespace MotobikeShop.Controllers
                     WardId = model.Ward,
                     HouseNum = model.HouseNumber
                 };
-                _context.Add(address);
-                await _context.SaveChangesAsync();
-
                 ApplicationUser User = new ApplicationUser()
                 {
                     Avatar = AvatarPathForUser(model.Iformfile_path),
@@ -67,13 +64,16 @@ namespace MotobikeShop.Controllers
                 };
                 var result = await _userManager.CreateAsync(User, model.Password);
 
-                address.ApplicationUserId = User.Id;
-                await _context.SaveChangesAsync();
-
                 if (result.Succeeded)
                 {
+                    _context.Add(address);
+                    await _context.SaveChangesAsync();
+
+                    address.ApplicationUserId = User.Id;
+                    await _context.SaveChangesAsync();
+
                     await _signInManager.SignInAsync(User, false);
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "CustomerHome");
                 }
                 else
                     foreach (var item in result.Errors)

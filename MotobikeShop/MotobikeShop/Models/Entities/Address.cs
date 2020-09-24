@@ -12,7 +12,6 @@ namespace MotobikeShop.Models.Entities
         public int ProvinceId { get; set; }
         public int DistrictId { get; set; }
         public int WardId { get; set; }
-        public string FullName { get; set; }
 
         [MaxLength(200)]
         [Required(ErrorMessage = "Trường này không được bỏ trống")]

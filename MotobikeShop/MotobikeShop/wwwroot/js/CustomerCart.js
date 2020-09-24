@@ -1,4 +1,7 @@
-﻿var CustomerCart = CustomerCart || {};
+﻿import { intl } from "modernizr";
+import { isNumber } from "util";
+
+var CustomerCart = CustomerCart || {};
 
 CustomerCart.AddItem = function (id) {
 
@@ -61,20 +64,18 @@ CustomerCart.OrderWithoutAccount = function () {
     if (address == "") {
         $("#validateAddress").html("bạn chưa nhập địa chỉ");
     }
-
     var j = 0;
     for (var i = 0; i < email.length; i++) {
-        if (email[i]=="@") {
+        if (email[i] == "@") {
             j = 1;
             break;
         }
     }
-    if (j!=1) {
+    if (j != 1) {
         $("#validateEmail").html("Email không đúng định dạng");
         $("#Email").val("");
     }
-
-    if (phoneNum.toString().length < 9) {
+    if (phoneNum.length < 9) {
         $("#validatePhoneNum").html("Số điện thoại có ít nhất 9 chữ số!");
     }
 
@@ -85,6 +86,7 @@ CustomerCart.OrderWithoutAccount = function () {
         success: function (data) {
             console.log(data);
             if (data > 0) {
+                $("#close").click();
                 bootbox.alert({
                     message: "<p style='color: green'>Đặt Hàng Thành Công, Xe được giao hàng trong 3 ngày tới</p><p style='color: green'>Xin Cảm Ơn !</p>",
                     callback: function () {

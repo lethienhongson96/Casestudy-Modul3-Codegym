@@ -27,6 +27,7 @@ namespace MotobikeShop.Controllers
         public IActionResult Index()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("CartSession");
+
             if (cart == null)
                 HttpContext.Session.SetObjectAsJson("CartSession", new List<CartItem>());
             else
@@ -41,10 +42,7 @@ namespace MotobikeShop.Controllers
             return View();
         }
 
-        public IActionResult WatchProduct(int id)
-        {
-            return View(homeRepository.GetProductsByCateId(id));
-        }
+        public IActionResult WatchProduct(int id) => View(homeRepository.GetProductsByCateId(id));
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

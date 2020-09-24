@@ -1,10 +1,11 @@
 ﻿
-@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager;
+@inject SignInManager<ApplicationUser> _signInManager;
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
     var cart= HttpContextAccessor.HttpContext.Session.GetObjectFromJson<List<CartItem>>("CartSession");
     var CurrentAccount = _signInManager.UserManager.GetUserAsync(User).Result;
+    int CartNumDefault = 0;
 }
 <!doctype html>
 <html lang="en">
@@ -49,15 +50,11 @@
                             <li><a href="people.html">Phân Quyền Cho User</a></li>
                         </ul>
                     </li>
-                    <li class="menu-list">
-                        <a href="#">
-                            <i class="fa fa-file-text"></i>
-                            <span>Hóa Đơn<i class="lnr lnr-chevron-right"></i></span>
+                    <li>
+                        <a asp-controller="Order" asp-action="Index">
+                            <i class='fa fa-file-text' style='font-size:24px'></i>
+                            <span>Quản Lí Hóa Đơn</span>
                         </a>
-                        <ul class="sub-menu-list">
-                            <li><a asp-controller="Order" asp-action="Index">Quản Lí Hóa Đơn</a></li>
-                            <li><a href="people.html">Thanh Toán</a></li>
-                        </ul>
                     </li>
                     <li class="menu-list">
                         <a href="#">
@@ -145,7 +142,6 @@
                                             </li>
                                         </ul>
                                     </li>
-
                                 }
                             </ul>
                         </div>
