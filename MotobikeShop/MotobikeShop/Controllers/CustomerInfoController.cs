@@ -21,9 +21,6 @@ namespace MotobikeShop.Controllers
             return View();
         }
 
-        public IActionResult CustomerDetail(int id)
-        {
-            return View(customerInfoRepository.GetInfoCustomerById(id));
-        }
+        public IActionResult CustomerDetail(int id) => View(customerInfoRepository.GetInfoCustomerById(id));
     }
 }

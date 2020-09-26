@@ -1,7 +1,4 @@
-﻿import { intl } from "modernizr";
-import { isNumber } from "util";
-
-var CustomerCart = CustomerCart || {};
+﻿var CustomerCart = CustomerCart || {};
 
 CustomerCart.AddItem = function (id) {
 
@@ -13,7 +10,6 @@ CustomerCart.AddItem = function (id) {
         contentType: 'json',
         success: function (data) {
             console.log(data);
-
             if (data == -1) {
                 bootbox.alert("<p style='color: green'>Thêm Sản Phẩm Thành Công</p>");
             }

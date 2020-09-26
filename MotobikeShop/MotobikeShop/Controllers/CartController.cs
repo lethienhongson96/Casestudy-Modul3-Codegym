@@ -5,11 +5,9 @@ using MotobikeShop.Models;
 using MotobikeShop.Models.CartSession;
 using MotobikeShop.Models.Entities;
 using MotobikeShop.Repositories;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 
 namespace MotobikeShop.Controllers
 {
@@ -48,12 +46,10 @@ namespace MotobikeShop.Controllers
                     HttpContext.Session.SetObjectAsJson(CartSession, cart);
                     return Json(-1);
                 }
-                else
-                {
-                    cart.Add(item);
-                    HttpContext.Session.SetObjectAsJson(CartSession, cart);
-                    return Json(cart.Count);
-                }
+                cart.Add(item);
+                HttpContext.Session.SetObjectAsJson(CartSession, cart);
+
+                return Json(cart.Count);
             }
             cart.Add(item);
             HttpContext.Session.SetObjectAsJson(CartSession, cart);
@@ -105,7 +101,7 @@ namespace MotobikeShop.Controllers
 
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(address) && phoneNum.Length > 8)
             {
-                if(email.Contains("@")==false)
+                if (email.Contains("@") == false)
                     return Json(result);
 
                 InfoCustomer infoCustomer = new InfoCustomer()

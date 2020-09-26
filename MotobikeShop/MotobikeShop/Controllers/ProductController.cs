@@ -81,9 +81,7 @@ namespace MotobikeShop.Controllers
                 return RedirectToAction("Index", "Product");
 
             ModelState.AddModelError("", TextErrorToView.WrongMess);
-
             return View(ReStoreViews);
-
         }
     }
 }

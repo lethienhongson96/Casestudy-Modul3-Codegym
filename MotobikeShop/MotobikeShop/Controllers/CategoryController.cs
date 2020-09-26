@@ -91,7 +91,6 @@ namespace MotobikeShop.Controllers
             ModelState.AddModelError("", TextErrorToView.WrongMess);
 
             return View(reStoreCategoryViews);
-
         }
     }
 }

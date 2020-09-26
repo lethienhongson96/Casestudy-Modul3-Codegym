@@ -38,31 +38,32 @@ namespace MotobikeShop.Controllers
             return RedirectToAction("Index", "Role");
         }
 
-        [HttpGet]
-        public IActionResult Edit(string id)
+        //[HttpGet]
+        //public IActionResult Edit(string id)
+        //{
+        //    var identityRole = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
+
+        //    EditRoleView role = new EditRoleView()
+        //    {
+        //        Role_Name = identityRole.Name,
+        //        Role_Id = identityRole.Id
+        //    };
+        //    return View(role);
+        //}
+
+        [Route("/Role/Edit/{id}/{result}")]
+        public async Task<IActionResult> Edit(string id, string result)
         {
-            var identityRole = _roleManager.Roles.FirstOrDefault(r => r.Id == id);
+            bool isSuccess = false;
 
-            EditRoleView role = new EditRoleView()
-            {
-                Role_Name = identityRole.Name,
-                Role_Id = identityRole.Id
-            };
-            return View(role);
-        }
+            var identityRole = await _roleManager.FindByIdAsync(id);
+            identityRole.Name = result;
+            var identityResult= await _roleManager.UpdateAsync(identityRole);
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(EditRoleView role)
-        {
-            if (ModelState.IsValid)
-            {
-                var identityRole = await _roleManager.FindByIdAsync(role.Role_Id);
-                identityRole.Name = role.Role_Name;
+            if (identityResult.Succeeded)
+                isSuccess = true;
 
-                await _roleManager.UpdateAsync(identityRole);
-                return RedirectToAction("Index", "Role");
-            }
-            return View(role);
+            return Json(new { isSuccess });
         }
 
         [Route("/Role/Delete/{id}")]

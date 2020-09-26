@@ -23,6 +23,7 @@ namespace MotobikeShop.Controllers
         public IActionResult Index()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("CartSession");
+
             if (cart == null)
                 HttpContext.Session.SetObjectAsJson("CartSession", new List<CartItem>());
             else
@@ -32,14 +33,12 @@ namespace MotobikeShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult WatchProducts(int id)
-        {
-            return View(categoryRepository.GetProductsByCategoryId(id));
-        }
+        public IActionResult WatchProducts(int id) => View(categoryRepository.GetProductsByCategoryId(id));
 
         public IActionResult WatchCart()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
+
             if (cart != null)
                 HttpContext.Session.SetObjectAsJson(CartSession, cart);
             else

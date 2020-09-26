@@ -53,26 +53,29 @@ namespace MotobikeShop.Controllers
                     WardId = model.Ward,
                     HouseNum = model.HouseNumber
                 };
-                ApplicationUser User = new ApplicationUser()
+                ApplicationUser user = new ApplicationUser()
                 {
                     Avatar = AvatarPathForUser(model.Iformfile_path),
                     FullName = model.FullName,
                     PhoneNumber = model.PhoneNum,
                     Email = model.Email,
-                    UserName = model.Email,
-                    AddressId = address.Id
+                    UserName = model.Email
                 };
-                var result = await _userManager.CreateAsync(User, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     _context.Add(address);
                     await _context.SaveChangesAsync();
 
-                    address.ApplicationUserId = User.Id;
+                    address.ApplicationUserId = user.Id;
+                    user.AddressId = address.Id;
+
+                    await _userManager.UpdateAsync(user);
+                    await _userManager.AddToRoleAsync(user, "Customer");
                     await _context.SaveChangesAsync();
 
-                    await _signInManager.SignInAsync(User, false);
+                    await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "CustomerHome");
                 }
                 else
@@ -122,8 +125,8 @@ namespace MotobikeShop.Controllers
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
-                    else
-                        return RedirectToAction("Index", "CustomerHome");
+
+                    return RedirectToAction("Index", "CustomerHome");
                 }
             }
             ModelState.AddModelError("", "Sai Tài Khoản Hoặc Mật Khẩu !");
@@ -203,9 +206,7 @@ namespace MotobikeShop.Controllers
                 return Json(new { deleteResult });
 
             var address = _context.Addresses.FirstOrDefault(el => el.Id == existUser.AddressId);
-
             _context.Remove(address);
-            //Task.Run(async () => await _context.SaveChangesAsync());
 
             if (existUser.Avatar != AvatarUserDefault)
             {
@@ -267,7 +268,6 @@ namespace MotobikeShop.Controllers
                 else
                     return View();
             }
-
             return View();
         }
     }
