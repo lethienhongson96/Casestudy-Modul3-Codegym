@@ -67,7 +67,6 @@ namespace MotobikeShop.Controllers
                 ShipperDate = DateTime.Today
             };
             orderRepository.CreateOrder(order);
-
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
 
             foreach (var item in cart)

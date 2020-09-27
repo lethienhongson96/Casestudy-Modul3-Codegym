@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MotobikeShop.Enums;
-using MotobikeShop.Models;
 using MotobikeShop.Models.Entities;
 using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrderDetailController : Controller
     {
         private readonly IOrderDetailRepository detailRepository;

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MotobikeShop.Models;
 using MotobikeShop.Models.CartSession;
 using MotobikeShop.Repositories;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace MotobikeShop.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

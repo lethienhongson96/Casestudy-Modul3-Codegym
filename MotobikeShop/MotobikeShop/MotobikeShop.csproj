@@ -44,8 +44,6 @@
     <None Include="Views\Product\Create.cshtml" />
     <None Include="Views\Product\Edit.cshtml" />
     <None Include="Views\Product\Index.cshtml" />
-    <None Include="Views\Role\Edit.cshtml" />
-    <None Include="Views\Role\Index.cshtml" />
   </ItemGroup>
 
 </Project>

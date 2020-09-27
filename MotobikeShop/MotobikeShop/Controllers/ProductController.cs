@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MotobikeShop.Enums;
 using MotobikeShop.Models.ViewModels;
@@ -9,6 +10,7 @@ using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;

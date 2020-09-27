@@ -147,12 +147,24 @@
                         </div>
                     </div>
                     <div>
-                        <a asp-controller="Cart" asp-action="Index" >
-                            <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-top:20px"></i>
-                            <span style="color:red;padding-left:1px;" id="CartNum">
-                                @cart.Count
-                            </span>
-                        </a>
+                        @if (cart != null)
+                        {
+                            <a asp-controller="Cart" asp-action="Index">
+                                <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-top:20px"></i>
+                                <span style="color:red;padding-left:1px;" id="CartNum">
+                                    @cart.Count
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Cart" asp-action="Index">
+                                <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-top:20px"></i>
+                                <span style="color:red;padding-left:1px;" id="CartNum">
+                                    @CartNumDefault
+                                </span>
+                            </a>
+                        }
                     </div>
                 </div>
             </div>

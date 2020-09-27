@@ -15,6 +15,7 @@ using MotobikeShop.Models.ViewModels;
 
 namespace MotobikeShop.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private readonly AppDbContext _context;
@@ -78,9 +79,8 @@ namespace MotobikeShop.Controllers
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "CustomerHome");
                 }
-                else
-                    foreach (var item in result.Errors)
-                        ModelState.AddModelError("", item.Description);
+                foreach (var item in result.Errors)
+                    ModelState.AddModelError("", item.Description);
             }
             return View();
         }
@@ -181,6 +181,9 @@ namespace MotobikeShop.Controllers
             FindUser.Address = address;
             FindUser.Avatar = UserModel.Avatar_Path;
 
+            if (UserModel.RoleId != null)
+                await _userManager.AddToRoleAsync(FindUser,"Admin");
+
             if (UserModel.Iformfile_path != null)
             {
                 FindUser.Avatar = UploadedFile(UserModel.Iformfile_path);
@@ -270,5 +273,8 @@ namespace MotobikeShop.Controllers
             }
             return View();
         }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied() => View();
     }
 }

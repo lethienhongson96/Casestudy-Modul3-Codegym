@@ -10,6 +10,7 @@ using MotobikeShop.Repositories;
 
 namespace MotobikeShop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrderController : Controller
     {
         private readonly IOrderRepository orderRepository;

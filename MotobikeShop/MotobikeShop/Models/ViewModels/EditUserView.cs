@@ -15,6 +15,7 @@ namespace MotobikeShop.Models.ViewModels
         public string PhoneNum { get; set; }
         public Address Address { get; set; }
         public string Avatar_Path { get; set; }
+        public string RoleId { get; set; }
         public IFormFile Iformfile_path { get; set; }
     }
 }
