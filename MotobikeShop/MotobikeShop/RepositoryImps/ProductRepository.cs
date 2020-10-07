@@ -39,7 +39,7 @@ namespace MotobikeShop.RepositoryImps
             if (productView.IformfilePath != null)
                 product.ImagePath = UploadedFile(productView.IformfilePath);
 
-            context.Products.Add(product);
+            context.Add(product);
             return (context.SaveChanges());
         }
 

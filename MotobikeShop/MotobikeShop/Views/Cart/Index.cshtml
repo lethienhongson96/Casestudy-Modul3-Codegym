@@ -1,5 +1,4 @@
 ﻿@model List<CartItem>
-
 @inject AppDbContext context;
 @{
     List<Product> products = context.Products.ToList();

@@ -47,23 +47,24 @@
                             {
                                 if (i == 0)
                                 {
-                                    <div class="carousel-item active layer">
-                                        <img src="~/Images/ProductImages/@product.ImagePath"
-                                             class="d-block w-100" alt="..." style="height:370px" />
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h3>@product.Name</h3>
-                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                        </div>
-                                    </div>
+                            <div class="carousel-item active layer">
+                                <img src="~/Images/ProductImages/@product.ImagePath"
+                                     class="d-block w-100" alt="..." style="height:370px" />
+                               
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h4 style="color:red">@product.Name</h4>
+                                    @*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*@
+                                </div>
+                            </div>
                                 }
                                 else
                                 {
                                     <div class="carousel-item layer">
                                         <img src="~/Images/ProductImages/@product.ImagePath"
                                              class="d-block w-100" alt="..." style="height:370px" />
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h3>@product.Name</h3>
-                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                        <div class="carousel-caption d-none d-md-block">                                       
+                                            <h4 style="color:red">@product.Name</h4>
+                                            @*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*@
                                         </div>
                                     </div>
                                 }

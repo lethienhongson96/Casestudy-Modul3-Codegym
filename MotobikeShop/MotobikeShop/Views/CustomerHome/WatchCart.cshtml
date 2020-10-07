@@ -83,7 +83,7 @@
                 <tr>
                     @{ double total = item.Amount * products.Find(el => el.Id == item.ProductId).PricePerUnit; }
                     <td>@products.Find(el => el.Id == item.ProductId).Name</td>
-                    <td>@item.Amount</td>
+                    <td><input type="number" onclick="ChangeAmount(this.value)" value="@item.Amount"/></td>
                     <td>
                         <img src="~/Images/ProductImages/@products.Find(el => el.Id == item.ProductId).ImagePath"
                              style="height:70px;width:70px" />
@@ -112,3 +112,8 @@ else
     <div style="height:100px"></div>
     <div class="clearfix"></div>
 }
+
+<script>
+
+
+</script>

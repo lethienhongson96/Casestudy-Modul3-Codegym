@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MotobikeShop.Models;
 using MotobikeShop.Models.Entities;
 using MotobikeShop.Models.ViewModels;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MotobikeShop.Controllers
 {
@@ -54,6 +53,7 @@ namespace MotobikeShop.Controllers
                     WardId = model.Ward,
                     HouseNum = model.HouseNumber
                 };
+
                 ApplicationUser user = new ApplicationUser()
                 {
                     Avatar = AvatarPathForUser(model.Iformfile_path),
@@ -81,8 +81,9 @@ namespace MotobikeShop.Controllers
                 }
                 foreach (var item in result.Errors)
                     ModelState.AddModelError("", item.Description);
+                return View(model);
             }
-            return View();
+            return View(model);
         }
 
         private string AvatarPathForUser(IFormFile iformfile_path)
@@ -222,6 +223,7 @@ namespace MotobikeShop.Controllers
             return Json(new { deleteResult });
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
@@ -263,6 +265,48 @@ namespace MotobikeShop.Controllers
                     {
                         await _userManager.UpdateAsync(user);
                         return RedirectToAction("Index", "Home");
+                    }
+                    else
+                        foreach (var item in result.Errors)
+                            ModelState.AddModelError("", item.Description);
+                }
+                else
+                    return View();
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassAdmin(string id)
+        {
+            ApplicationUser user = _userManager.FindByIdAsync(id).Result;
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Tài khoản này không tồn tại");
+                return RedirectToAction("Index", "CustomerHome");
+            }
+            ChangePassUserView changePassUserView = new ChangePassUserView()
+            {
+                Id = user.Id,
+            };
+            return View(changePassUserView);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassAdmin(ChangePassUserView changePassView)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = _userManager.FindByIdAsync(changePassView.Id).Result;
+                if (user != null)
+                {
+                    var result = await _userManager.ChangePasswordAsync(user, changePassView.CurrentPassword, changePassView.NewPassword);
+
+                    if (result.Succeeded)
+                    {
+                        await _userManager.UpdateAsync(user);
+                        return RedirectToAction("Index", "CustomerHome");
                     }
                     else
                         foreach (var item in result.Errors)

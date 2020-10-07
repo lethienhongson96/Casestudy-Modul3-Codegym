@@ -109,5 +109,7 @@ namespace MotobikeShop.RepositoryImps
 
         public List<OrderDetail> GetOrderDetailsByOrderId(int id) =>
             context.OrderDetails.ToList().FindAll(el => el.OrderId == id);
+
+        public List<Order> GetOrdersByUserId(string id) => context.Orders.Where(el => el.CreateBy == id).ToList();
     }
 }

@@ -8,6 +8,7 @@ using MotobikeShop.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace MotobikeShop.Controllers
 {
@@ -29,6 +30,8 @@ namespace MotobikeShop.Controllers
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
             HttpContext.Session.SetObjectAsJson(CartSession, cart);
 
+            Response.Cookies.Append("ProductLike", "1");
+
             return View(cart);
         }
 
@@ -37,6 +40,24 @@ namespace MotobikeShop.Controllers
         {
             CartItem item = new CartItem() { ProductId = id, Amount = amount };
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);
+
+            string ck = Request.Cookies["ProductLike"];
+            if (ck != null)
+            {
+                string result= Request.Cookies["ProductLike"];
+                Response.Cookies.Append("ProductLike", result+$";{id}");
+                result = Request.Cookies["ProductLike"];
+                int[] ia = result.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
+                string[] strarr = { "1", "2" };
+                string str = String.Join(";", strarr);
+                Response.Cookies.Append("cookies", str);
+                ViewData["cookies"] = Request.Cookies["cookies"];
+            }
+            else
+            {
+                Response.Cookies.Append("ProductLike", id.ToString());
+            }
+            ViewData["ProductLike"]= Request.Cookies["ProductLike"];
 
             if (cart.Count != 0)
             {
@@ -64,7 +85,7 @@ namespace MotobikeShop.Controllers
             {
                 CreateBy = id,
                 CreateAt = DateTime.Today,
-                ShipperDate = DateTime.Today
+                ShipperDate = DateTime.Today.AddDays(3)
             };
             orderRepository.CreateOrder(order);
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSession);

@@ -67,5 +67,9 @@ namespace MotobikeShop.Controllers
             var result = orderRepository.PayOrder(id);
             return Json(new { result });
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult WatchHistoryByUserId(string id) => View(orderRepository.GetOrdersByUserId(id));
     }
 }

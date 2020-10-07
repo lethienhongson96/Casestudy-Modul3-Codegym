@@ -32,12 +32,14 @@ namespace MotobikeShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (productRepository.CreateProduct(productView) == -1)
+                int result = productRepository.CreateProduct(productView);
+                if (result == -1)
                 {
                     ModelState.AddModelError("","Tên Sản Phẩm Đả Tồn Tại");
                     return View(productView);
                 }
-                if (productRepository.CreateProduct(productView) > 0)
+                
+                if (result > 0)
                     return RedirectToAction("Index", "Product");
 
                 ModelState.AddModelError("", TextErrorToView.WrongMess);

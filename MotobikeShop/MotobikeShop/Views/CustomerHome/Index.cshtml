@@ -4,6 +4,7 @@
     var MaxSale = context.Products.Max(x => x.SaleCount);
     Product ProductTop = context.Products.FirstOrDefault(el => el.SaleCount == MaxSale);
 }
+
 @foreach (var item in Model)
 {
     <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -22,6 +23,5 @@
         </div>
     </div>
 }
-
 @await Html.PartialAsync("_TopSaleProductView", ProductTop)
 

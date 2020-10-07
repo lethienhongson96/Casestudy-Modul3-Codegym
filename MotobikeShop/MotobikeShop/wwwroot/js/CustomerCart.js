@@ -94,6 +94,20 @@ CustomerCart.OrderWithoutAccount = function () {
     });
 }
 
+CustomerCart.AddLikeItem = function (id) {
+    $.ajax({
+        url: `/Cart/AddLikeItem/${id}`,
+        method: "GET",
+        contentType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (data > 0) {
+                window.location.href = "/CustomerHome/WatchCart/";
+            }
+        }
+    });
+}
+
 CustomerCart.RemoveItem = function (id) {
     $.ajax({
         url: `/Cart/RemoveItem/${id}`,
